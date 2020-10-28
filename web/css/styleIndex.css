@@ -1,0 +1,311 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+input {
+    width: 80%;
+    outline: none;
+    border: 0;
+    background: transparent;
+
+    font-style: normal;
+    font-weight: bold;
+    font-size: 18px;
+    color: white;
+}
+
+::placeholder {
+    color: white;
+}
+
+#back-img {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+
+.back {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    /*background-color: #100F3E;*/
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.content {
+    width: 810px;
+    height: 330px;
+    left: 370px;
+    top: 195px;
+    display: flex;
+    flex-direction: row;
+}
+
+.side-bar {
+    position: relative;
+    width: 160px;
+    height: 330px;
+    border: 4px #4A2E87 solid;
+    background-color: #100F3E;
+}
+
+#choose-btn {
+    position: absolute;
+    width: 160px;
+    height: 110px;
+    background-color: #4A2E87;
+    top: 0px;
+    transition: .5s;
+}
+
+.side-bar-buttons {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.toggle-btn {
+    width: 100%;
+    height: 110px;
+    flex-grow: 1;
+    background: transparent;
+    outline: none;
+    border: 0;
+    cursor: pointer;
+    z-index: 2;
+}
+
+/*.toggle-btn:hover{
+   background-color: #472D73;
+}*/
+
+.toggle-btn {
+    color: white;
+}
+
+#main {
+    width: 650px;
+    height: 330px;
+    background-color: #100F3E;
+    border: 4px #4A2E87 solid;
+    border-left: 0px;
+    border-radius: 0px 60px 60px 0px;
+    position: relative;
+    overflow: hidden;
+}
+
+#groups-container {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0px;
+    transition: .5s;
+}
+
+.input-group {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+}
+
+.head-text {
+    position: relative;
+
+    font-family: Arial;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 36px;
+    text-align: center;
+
+    color: #FFFFFF;
+}
+
+.input-area {
+    width: 550px;
+    height: 50px;
+    background: #2C3C77;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    color: white;
+}
+
+.submit-button {
+    background: #4A2E87;
+    border-radius: 20px;
+
+    color: white;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+
+    outline: none;
+    border: 0;
+    cursor: pointer;
+
+    font-family: Arial;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 18px;
+}
+
+/* login page */
+
+#login-case .head-text {
+    position: absolute;
+    top: 26px;
+}
+
+#login-case #login1 {
+    position: absolute;
+    top: 100px;
+}
+
+#login-case #login1 svg {
+    position: relative;
+    left: 30px;
+}
+
+#login-case #login1 input {
+    position: relative;
+    top: 1px;
+    left: 40px;
+}
+
+#login-case #login2 {
+    position: absolute;
+    top: 170px;
+}
+
+#login-case #login2 svg {
+    position: relative;
+    left: 27px;
+}
+
+#login-case #login2 input {
+    position: relative;
+    top: 1px;
+    left: 30px;
+}
+
+#login-case .submit-button {
+    position: absolute;
+    width: 200px;
+    height: 45px;
+    top: 250px;
+}
+
+/* registration page */
+
+#register-case .head-text {
+    position: absolute;
+    top: 26px;
+}
+
+#register-case .reg-row {
+    width: 550px;
+    height: 50px;
+
+    background: transparent;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+#register-case .input-area {
+    width: 49.5%;
+}
+
+#register-case #reg1 svg {
+    position: relative;
+    left: 30px;
+}
+
+#register-case #reg1 input {
+    position: relative;
+    top: 1px;
+    left: 40px;
+}
+
+#register-case #reg2 svg {
+    position: relative;
+    left: 27px;
+}
+
+#register-case #reg2 input {
+    position: relative;
+    top: 1px;
+    left: 30px;
+}
+
+#register-case #reg3 svg {
+    position: relative;
+    left: 27px;
+}
+
+#register-case #reg3 input {
+    position: relative;
+    top: 1px;
+    left: 30px;
+}
+
+#register-case #reg4 svg {
+    position: relative;
+    left: 27px;
+}
+
+#register-case #reg4 input {
+    position: relative;
+    top: 1px;
+    left: 30px;
+}
+
+#register-case .submit-button {
+    position: absolute;
+    width: 200px;
+    height: 45px;
+    left: 225px;
+    top: 250px;
+}
+
+/* restore page */
+
+#restore-case .head-text {
+    position: absolute;
+    top: 26px;
+}
+
+#restore-case #restore1 {
+    position: absolute;
+    top: 110px;
+}
+
+#restore-case #restore1 svg {
+    position: relative;
+    left: 30px;
+}
+
+#restore-case #restore1 input {
+    position: relative;
+    top: 1px;
+    left: 40px;
+}
+
+#restore-case .submit-button {
+    position: absolute;
+    width: 200px;
+    height: 45px;
+    left: 225px;
+    top: 250px;
+}

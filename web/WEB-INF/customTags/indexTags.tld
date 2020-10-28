@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<taglib xmlns="http://java.sun.com/xml/ns/javaee"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-jsptaglibrary_2_1.xsd"
+        version="2.1">
+
+    <tlib-version>1.0</tlib-version>
+    <short-name>indexTags</short-name>
+    <uri>http://itlab.ru</uri>
+
+    <tag>
+        <name>sidebar-button</name>
+        <tag-class>CustomTags.IndexSideBarBtnTag</tag-class>
+        <body-content>scriptless</body-content>
+        <attribute>
+            <name>oninputFunctionName</name>
+            <required>true</required>
+        </attribute>
+        <attribute>
+            <name>text</name>
+            <required>true</required>
+        </attribute>
+    </tag>
+
+    <tag>
+        <name>container</name>
+        <tag-class>CustomTags.IndexContainerTag</tag-class>
+        <body-content>scriptless</body-content>
+        <attribute>
+            <description>Set form method (POST/GET/etc)</description>
+            <name>method</name>
+            <required>true</required>
+        </attribute>
+        <attribute>
+            <description>Set form action (url for Servlets)</description>
+            <name>action</name>
+            <required>true</required>
+        </attribute>
+        <attribute>
+            <description>"login" for Login form</description>
+            <name>groupName</name>
+            <required>true</required>
+        </attribute>
+        <attribute>
+            <description>text in head of list</description>
+            <name>headText</name>
+            <required>true</required>
+        </attribute>
+    </tag>
+
+    <tag>
+        <name>container-btn</name>
+        <tag-class>CustomTags.IndexContainerBtnTag</tag-class>
+        <body-content>scriptless</body-content>
+        <attribute>
+            <name>text</name>
+            <required>true</required>
+        </attribute>
+    </tag>
+
+</taglib>

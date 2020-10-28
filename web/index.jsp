@@ -1,0 +1,227 @@
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="tags" uri="/WEB-INF/customTags/indexTags.tld" %>
+<html>
+<head>
+    <title>Title</title>
+    <link href="css/styleIndex.css" rel="stylesheet" type="text/css">
+    <script>
+        let url = new URL(window.location.href);
+        console.log(url);
+        // document.location.href = removeParam("return", url.href);
+        if (url.searchParams.get("return") === "-1") alert("Invalid email or password"); //invalid email or password
+        if (url.searchParams.get("return") === "-11") alert(""); //passwords don't equals
+        if (url.searchParams.get("return") === "-12") alert(""); //already registered
+        //TODO save input values
+        if (url.searchParams.get("return") === "-13") alert(""); //doesn't match to regex
+
+        function removeParam(key, sourceURL) {
+            let rtn = sourceURL.split("?")[0],
+                param,
+                params_arr = [],
+                queryString = (sourceURL.indexOf("?") !== -1) ? sourceURL.split("?")[1] : "";
+            if (queryString !== "") {
+                params_arr = queryString.split("&");
+                for (let i = params_arr.length - 1; i >= 0; i -= 1) {
+                    param = params_arr[i].split("=")[0];
+                    if (param === key) {
+                        params_arr.splice(i, 1);
+                    }
+                }
+                rtn = rtn + "?" + params_arr.join("&");
+            }
+            return rtn;
+        }
+    </script>
+</head>
+<body>
+<img src="imgs/data-original-cutted.jpg" id="back-img">
+<div class="back">
+    <div class="content">
+        <div class="side-bar">
+            <div id="choose-btn"></div>
+            <div class="side-bar-buttons">
+                <tags:sidebar-button oninputFunctionName="login()" text="Login">
+                    <svg width="25px" height="25px" viewBox="0 0 16 16" class="bi bi-person-circle" fill="currentColor"
+                         xmlns="http://www.w3.org/2000/svg">
+                        <path d="M13.468 12.37C12.758 11.226 11.195 10 8 10s-4.757 1.225-5.468 2.37A6.987 6.987 0 0 0 8 15a6.987 6.987 0 0 0 5.468-2.63z"/>
+                        <path fill-rule="evenodd" d="M8 9a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
+                        <path fill-rule="evenodd"
+                              d="M8 1a7 7 0 1 0 0 14A7 7 0 0 0 8 1zM0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8z"/>
+                    </svg>
+                </tags:sidebar-button>
+                <tags:sidebar-button oninputFunctionName="register()" text="Sign In">
+                    <svg width="25px" height="25px" viewBox="0 0 16 16" class="bi bi-pencil-square" fill="currentColor"
+                         xmlns="http://www.w3.org/2000/svg">
+                        <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456l-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
+                        <path fill-rule="evenodd"
+                              d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
+                    </svg>
+                </tags:sidebar-button>
+                <tags:sidebar-button oninputFunctionName="restore()" text="Forgot Password?">
+                    <svg width="20px" height="27px" viewBox="0 0 16 16" class="bi bi-lock-fill" fill="currentColor"
+                         xmlns="http://www.w3.org/2000/svg">
+                        <path d="M2.5 9a2 2 0 0 1 2-2h7a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-7a2 2 0 0 1-2-2V9z"/>
+                        <path fill-rule="evenodd" d="M4.5 4a3.5 3.5 0 1 1 7 0v3h-1V4a2.5 2.5 0 0 0-5 0v3h-1V4z"/>
+                    </svg>
+                </tags:sidebar-button>
+            </div>
+        </div>
+        <div id="main">
+            <div id="groups-container">
+                <tags:container action="in" method="post" groupName="login" headText="Login Here">
+                    <div class="input-area" id="login1">
+                        <svg width="40px" height="25px" viewBox="0 0 16 16" class="bi bi-envelope"
+                             fill="currentColor"
+                             xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd"
+                                  d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4zm2-1a1 1 0 0 0-1 1v.217l7 4.2 7-4.2V4a1 1 0 0 0-1-1H2zm13 2.383l-4.758 2.855L15 11.114v-5.73zm-.034 6.878L9.271 8.82 8 9.583 6.728 8.82l-5.694 3.44A1 1 0 0 0 2 13h12a1 1 0 0 0 .966-.739zM1 11.114l4.758-2.876L1 5.383v5.73z"/>
+                        </svg>
+                        <input type="email" placeholder="E-mail" name="email" id="email1">
+                    </div>
+                    <div class="input-area" id="login2">
+                        <svg width="50px" height="25px" viewBox="0 0 16 16" class="bi bi-key" fill="currentColor"
+                             xmlns="http://www.w3.org/2000/svg"
+                             style="transform: rotate(90deg) scale(1,-1);">
+                            <path fill-rule="evenodd"
+                                  d="M0 8a4 4 0 0 1 7.465-2H14a.5.5 0 0 1 .354.146l1.5 1.5a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0L13 9.207l-.646.647a.5.5 0 0 1-.708 0L11 9.207l-.646.647a.5.5 0 0 1-.708 0L9 9.207l-.646.647A.5.5 0 0 1 8 10h-.535A4 4 0 0 1 0 8zm4-3a3 3 0 1 0 2.712 4.285A.5.5 0 0 1 7.163 9h.63l.853-.854a.5.5 0 0 1 .708 0l.646.647.646-.647a.5.5 0 0 1 .708 0l.646.647.646-.647a.5.5 0 0 1 .708 0l.646.647.793-.793-1-1h-6.63a.5.5 0 0 1-.451-.285A3 3 0 0 0 4 5z"/>
+                            <path d="M4 8a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"/>
+                        </svg>
+                        <input type="password" placeholder="Password" name="password">
+                    </div>
+                    <tags:container-btn text="Login">
+                        <svg width="23px" height="25px" viewBox="0 0 16 16" class="bi bi-door-open"
+                             fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd"
+                                  d="M1 15.5a.5.5 0 0 1 .5-.5h13a.5.5 0 0 1 0 1h-13a.5.5 0 0 1-.5-.5zM11.5 2H11V1h.5A1.5 1.5 0 0 1 13 2.5V15h-1V2.5a.5.5 0 0 0-.5-.5z"/>
+                            <path fill-rule="evenodd"
+                                  d="M10.828.122A.5.5 0 0 1 11 .5V15h-1V1.077l-6 .857V15H3V1.5a.5.5 0 0 1 .43-.495l7-1a.5.5 0 0 1 .398.117z"/>
+                            <path d="M8 9c0 .552.224 1 .5 1s.5-.448.5-1-.224-1-.5-1-.5.448-.5 1z"/>
+                        </svg>
+                    </tags:container-btn>
+                </tags:container>
+<%--                <form method="post" action="in">--%>
+<%--                    <div id="login-case" class="input-group">--%>
+<%--                        <div class="head-text">Login Here</div>--%>
+<%--                        <div class="input-area" id="login1">--%>
+<%--                            <svg width="40px" height="25px" viewBox="0 0 16 16" class="bi bi-envelope"--%>
+<%--                                 fill="currentColor"--%>
+<%--                                 xmlns="http://www.w3.org/2000/svg">--%>
+<%--                                <path fill-rule="evenodd"--%>
+<%--                                      d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4zm2-1a1 1 0 0 0-1 1v.217l7 4.2 7-4.2V4a1 1 0 0 0-1-1H2zm13 2.383l-4.758 2.855L15 11.114v-5.73zm-.034 6.878L9.271 8.82 8 9.583 6.728 8.82l-5.694 3.44A1 1 0 0 0 2 13h12a1 1 0 0 0 .966-.739zM1 11.114l4.758-2.876L1 5.383v5.73z"/>--%>
+<%--                            </svg>--%>
+<%--                            <input type="email" placeholder="E-mail" name="email" id="email1">--%>
+<%--                        </div>--%>
+<%--                        <div class="input-area" id="login2">--%>
+<%--                            <svg width="50px" height="25px" viewBox="0 0 16 16" class="bi bi-key" fill="currentColor"--%>
+<%--                                 xmlns="http://www.w3.org/2000/svg"--%>
+<%--                                 style="transform: rotate(90deg) scale(1,-1);">--%>
+<%--                                <path fill-rule="evenodd"--%>
+<%--                                      d="M0 8a4 4 0 0 1 7.465-2H14a.5.5 0 0 1 .354.146l1.5 1.5a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0L13 9.207l-.646.647a.5.5 0 0 1-.708 0L11 9.207l-.646.647a.5.5 0 0 1-.708 0L9 9.207l-.646.647A.5.5 0 0 1 8 10h-.535A4 4 0 0 1 0 8zm4-3a3 3 0 1 0 2.712 4.285A.5.5 0 0 1 7.163 9h.63l.853-.854a.5.5 0 0 1 .708 0l.646.647.646-.647a.5.5 0 0 1 .708 0l.646.647.646-.647a.5.5 0 0 1 .708 0l.646.647.793-.793-1-1h-6.63a.5.5 0 0 1-.451-.285A3 3 0 0 0 4 5z"/>--%>
+<%--                                <path d="M4 8a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"/>--%>
+<%--                            </svg>--%>
+<%--                            <input type="password" placeholder="Password" name="password">--%>
+<%--                        </div>--%>
+<%--                        <button type="submit" class="submit-button">--%>
+<%--                            <svg width="23px" height="25px" viewBox="0 0 16 16" class="bi bi-door-open"--%>
+<%--                                 fill="currentColor" xmlns="http://www.w3.org/2000/svg">--%>
+<%--                                <path fill-rule="evenodd"--%>
+<%--                                      d="M1 15.5a.5.5 0 0 1 .5-.5h13a.5.5 0 0 1 0 1h-13a.5.5 0 0 1-.5-.5zM11.5 2H11V1h.5A1.5 1.5 0 0 1 13 2.5V15h-1V2.5a.5.5 0 0 0-.5-.5z"/>--%>
+<%--                                <path fill-rule="evenodd"--%>
+<%--                                      d="M10.828.122A.5.5 0 0 1 11 .5V15h-1V1.077l-6 .857V15H3V1.5a.5.5 0 0 1 .43-.495l7-1a.5.5 0 0 1 .398.117z"/>--%>
+<%--                                <path d="M8 9c0 .552.224 1 .5 1s.5-.448.5-1-.224-1-.5-1-.5.448-.5 1z"/>--%>
+<%--                            </svg>--%>
+<%--                            <div>Login</div>--%>
+<%--                        </button>--%>
+<%--                    </div>--%>
+<%--                </form>--%>
+                <form method="post" action="up">
+                    <div id="register-case" class="input-group">
+                        <div class="head-text">Registration</div>
+                        <div class="reg-row" style="position:absolute; top: 100px">
+                            <div class="input-area" id="reg1">
+                                <svg width="30px" height="30px" viewBox="0 0 16 16" class="bi bi-person"
+                                     fill="currentColor"
+                                     xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd"
+                                          d="M10 5a2 2 0 1 1-4 0 2 2 0 0 1 4 0zM8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm6 5c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z"/>
+                                </svg>
+                                <input type="text" placeholder="Nickname" name="nickname">
+                            </div>
+                            <div class="input-area" id="reg2">
+                                <svg width="40px" height="25px" viewBox="0 0 16 16" class="bi bi-envelope"
+                                     fill="currentColor"
+                                     xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd"
+                                          d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4zm2-1a1 1 0 0 0-1 1v.217l7 4.2 7-4.2V4a1 1 0 0 0-1-1H2zm13 2.383l-4.758 2.855L15 11.114v-5.73zm-.034 6.878L9.271 8.82 8 9.583 6.728 8.82l-5.694 3.44A1 1 0 0 0 2 13h12a1 1 0 0 0 .966-.739zM1 11.114l4.758-2.876L1 5.383v5.73z"/>
+                                </svg>
+                                <input type="email" placeholder="E-mail" name="email" id="email2">
+                            </div>
+                        </div>
+                        <div class="reg-row" style="position:absolute; top: 170px">
+                            <div class="input-area" id="reg3">
+                                <svg width="50px" height="25px" viewBox="0 0 16 16" class="bi bi-key"
+                                     fill="currentColor"
+                                     xmlns="http://www.w3.org/2000/svg"
+                                     style="transform: rotate(90deg) scale(1,-1);">
+                                    <path fill-rule="evenodd"
+                                          d="M0 8a4 4 0 0 1 7.465-2H14a.5.5 0 0 1 .354.146l1.5 1.5a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0L13 9.207l-.646.647a.5.5 0 0 1-.708 0L11 9.207l-.646.647a.5.5 0 0 1-.708 0L9 9.207l-.646.647A.5.5 0 0 1 8 10h-.535A4 4 0 0 1 0 8zm4-3a3 3 0 1 0 2.712 4.285A.5.5 0 0 1 7.163 9h.63l.853-.854a.5.5 0 0 1 .708 0l.646.647.646-.647a.5.5 0 0 1 .708 0l.646.647.646-.647a.5.5 0 0 1 .708 0l.646.647.793-.793-1-1h-6.63a.5.5 0 0 1-.451-.285A3 3 0 0 0 4 5z"/>
+                                    <path d="M4 8a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"/>
+                                </svg>
+                                <input type="password" placeholder="Password" name="password">
+                            </div>
+                            <div class="input-area" id="reg4">
+                                <svg width="50px" height="25px" viewBox="0 0 16 16" class="bi bi-key"
+                                     fill="currentColor"
+                                     xmlns="http://www.w3.org/2000/svg"
+                                     style="transform: rotate(90deg) scale(1,-1);">
+                                    <path fill-rule="evenodd"
+                                          d="M0 8a4 4 0 0 1 7.465-2H14a.5.5 0 0 1 .354.146l1.5 1.5a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0L13 9.207l-.646.647a.5.5 0 0 1-.708 0L11 9.207l-.646.647a.5.5 0 0 1-.708 0L9 9.207l-.646.647A.5.5 0 0 1 8 10h-.535A4 4 0 0 1 0 8zm4-3a3 3 0 1 0 2.712 4.285A.5.5 0 0 1 7.163 9h.63l.853-.854a.5.5 0 0 1 .708 0l.646.647.646-.647a.5.5 0 0 1 .708 0l.646.647.646-.647a.5.5 0 0 1 .708 0l.646.647.793-.793-1-1h-6.63a.5.5 0 0 1-.451-.285A3 3 0 0 0 4 5z"/>
+                                    <path d="M4 8a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"/>
+                                </svg>
+                                <input type="password" placeholder="Repeat password" name="password">
+                            </div>
+                        </div>
+                        <button type="submit" class="submit-button">
+                            <svg width="23px" height="25px" viewBox="0 0 16 16" class="bi bi-door-open"
+                                 fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd"
+                                      d="M1 15.5a.5.5 0 0 1 .5-.5h13a.5.5 0 0 1 0 1h-13a.5.5 0 0 1-.5-.5zM11.5 2H11V1h.5A1.5 1.5 0 0 1 13 2.5V15h-1V2.5a.5.5 0 0 0-.5-.5z"/>
+                                <path fill-rule="evenodd"
+                                      d="M10.828.122A.5.5 0 0 1 11 .5V15h-1V1.077l-6 .857V15H3V1.5a.5.5 0 0 1 .43-.495l7-1a.5.5 0 0 1 .398.117z"/>
+                                <path d="M8 9c0 .552.224 1 .5 1s.5-.448.5-1-.224-1-.5-1-.5.448-.5 1z"/>
+                            </svg>
+                            <div>Sign Up</div>
+                        </button>
+                    </div>
+                </form>
+                <form method="post" action="rest">
+                    <div id="restore-case" class="input-group">
+                        <div class="head-text">Restore Password</div>
+                        <div class="input-area" id="restore1">
+                            <svg width="40px" height="25px" viewBox="0 0 16 16" class="bi bi-envelope"
+                                 fill="currentColor"
+                                 xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd"
+                                      d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4zm2-1a1 1 0 0 0-1 1v.217l7 4.2 7-4.2V4a1 1 0 0 0-1-1H2zm13 2.383l-4.758 2.855L15 11.114v-5.73zm-.034 6.878L9.271 8.82 8 9.583 6.728 8.82l-5.694 3.44A1 1 0 0 0 2 13h12a1 1 0 0 0 .966-.739zM1 11.114l4.758-2.876L1 5.383v5.73z"/>
+                            </svg>
+                            <input type="email" placeholder="E-mail" name="email" id="email3">
+                        </div>
+                        <button type="submit" class="submit-button">
+                            <svg width="40px" height="40px" viewBox="0 0 16 16" class="bi bi-arrow-repeat"
+                                 fill="currentColor"
+                                 xmlns="http://www.w3.org/2000/svg">
+                                <path d="M11.534 7h3.932a.25.25 0 0 1 .192.41l-1.966 2.36a.25.25 0 0 1-.384 0l-1.966-2.36a.25.25 0 0 1 .192-.41zm-11 2h3.932a.25.25 0 0 0 .192-.41L2.692 6.23a.25.25 0 0 0-.384 0L.342 8.59A.25.25 0 0 0 .534 9z"/>
+                                <path fill-rule="evenodd"
+                                      d="M8 3c-1.552 0-2.94.707-3.857 1.818a.5.5 0 1 1-.771-.636A6.002 6.002 0 0 1 13.917 7H12.9A5.002 5.002 0 0 0 8 3zM3.1 9a5.002 5.002 0 0 0 8.757 2.182.5.5 0 1 1 .771.636A6.002 6.002 0 0 1 2.083 9H3.1z"/>
+                            </svg>
+                            <div>Restore</div>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="js/codeIndex.js"></script>
+</body>
+</html>
