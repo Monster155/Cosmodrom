@@ -1,4 +1,4 @@
-package CustomTags;
+package CustomTags.IndexTags;
 
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.tagext.SimpleTagSupport;

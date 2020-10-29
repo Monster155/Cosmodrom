@@ -11,7 +11,7 @@
 
     <tag>
         <name>sidebar-button</name>
-        <tag-class>CustomTags.IndexSideBarBtnTag</tag-class>
+        <tag-class>CustomTags.IndexTags.IndexSideBarBtnTag</tag-class>
         <body-content>scriptless</body-content>
         <attribute>
             <name>oninputFunctionName</name>
@@ -25,7 +25,7 @@
 
     <tag>
         <name>container</name>
-        <tag-class>CustomTags.IndexContainerTag</tag-class>
+        <tag-class>CustomTags.IndexTags.IndexContainerTag</tag-class>
         <body-content>scriptless</body-content>
         <attribute>
             <description>Set form method (POST/GET/etc)</description>
@@ -51,7 +51,7 @@
 
     <tag>
         <name>container-btn</name>
-        <tag-class>CustomTags.IndexContainerBtnTag</tag-class>
+        <tag-class>CustomTags.IndexTags.IndexContainerBtnTag</tag-class>
         <body-content>scriptless</body-content>
         <attribute>
             <name>text</name>
