@@ -28,18 +28,21 @@ public class SignUpServlet extends HttpServlet {
 
         if (password.equals(password2)) {
             if (!Users.here.contains(email)) {
-                if (email.matches("([0-9a-zA-Z]+[\\.\\-_]?)*[0-9a-zA-Z]+@([0-9a-zA-Z]+[\\.\\-_]?)+\\.[0-9a-zA-Z]+")
-                        && password.matches("^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$")) {
+                Users.here.add(email, password);
 
-                    Users.here.add(email, password);
+                session.setAttribute("email", email);
+                session.setAttribute("password", password);
+                session.setAttribute("auth", true);
+                System.out.println("Ah, yes");
 
-                    session.setAttribute("email", email);
-                    session.setAttribute("password", password);
-                    session.setAttribute("auth", true);
-
-                    req.getRequestDispatcher(prop.getProperty("main")).forward(req, resp);
-                } else req.getRequestDispatcher(prop.getProperty("index") + "?return=-13").forward(req, resp);
-            } else req.getRequestDispatcher(prop.getProperty("index") + "?return=-12").forward(req, resp);
-        } else req.getRequestDispatcher(prop.getProperty("index") + "?return=-11").forward(req, resp);
+                req.getRequestDispatcher(prop.getProperty("editProfile")).forward(req, resp);
+            } else {
+                System.out.println(email);
+                resp.sendRedirect(prop.getProperty("index") + "?return=-12");
+            }
+        } else {
+            System.out.println(password + " " + password2);
+            resp.sendRedirect(prop.getProperty("index") + "?return=-11");
+        }
     }
 }

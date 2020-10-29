@@ -1,7 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Title</title>
+    <title>Cosmodrome</title>
     <link href="/css/styleUserPage.css" rel="stylesheet" type="text/css">
 </head>
 <body>
@@ -9,6 +9,7 @@
 <div id="background">
     <div id="content">
         <div id="menu">
+            <img src="/imgs/saved.png">
 
         </div>
         <div id="main">

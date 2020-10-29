@@ -47,7 +47,8 @@ public class InputTag extends SimpleTagSupport {
             getJspContext().getOut().println(
                     "<div class='input-area' id='" + id + "'>" +
                             body.toString() +
-                            "<input type='" + inputType + "' placeholder='" + inputPlaceholder + "' name='" + inputName + "' id='" + inputID + "'>" +
+                            "<input type='" + inputType + "' placeholder='" + inputPlaceholder +
+                            "' name='" + inputName + "' id='" + inputID + "' required>" +
                             "</div>"
             );
         } catch (IOException e) {

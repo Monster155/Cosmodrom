@@ -1,4 +1,4 @@
-package Servlets;
+package Servltes;
 
 import DBObjects.Users;
 

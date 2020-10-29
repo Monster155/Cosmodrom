@@ -2,17 +2,9 @@
 <%@ taglib prefix="tags" uri="/WEB-INF/customTags/indexTags.tld" %>
 <html>
 <head>
-    <title>Title</title>
+    <title>Cosmodrome</title>
     <link href="/css/styleIndex.css" rel="stylesheet" type="text/css">
-    <script>
-        let url = new URL(window.location.href);
-        console.log(url);
-        if (url.searchParams.get("return") === "-1") alert("Invalid email or password"); //invalid email or password
-        if (url.searchParams.get("return") === "-11") alert(""); //passwords don't equals
-        if (url.searchParams.get("return") === "-12") alert(""); //email already registered
-        //TODO save input values
-        if (url.searchParams.get("return") === "-13") alert(""); //doesn't match to regex
-    </script>
+    <script src="js/indexJS/catchParams.js"></script>
 </head>
 <body>
 <img src="/imgs/data-original-cutted.jpg" id="back-img">
@@ -102,7 +94,7 @@
                         </svg>
                     </tags:input>
                     <tags:input id="reg3" inputType="password" inputPlaceholder="Repeat password"
-                                inputName="password" inputID="password-repeat2">
+                                inputName="password-repeat" inputID="password-repeat2">
                         <svg width="50px" height="25px" viewBox="0 0 16 16" class="bi bi-key"
                              fill="currentColor"
                              xmlns="http://www.w3.org/2000/svg"
@@ -147,7 +139,7 @@
         </div>
     </div>
 </div>
-<script src="js/indexJS/codeIndex.js"></script>
 <script src="js/indexJS/checkPassword.js"></script>
+<script src="js/indexJS/codeIndex.js"></script>
 </body>
 </html>

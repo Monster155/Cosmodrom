@@ -15,9 +15,9 @@ document.addEventListener('DOMContentLoaded', function () {
 
     let inputs = document.getElementsByTagName('input');
     for (let i = 0; i < inputs.length; i++) {
-        inputs.item(i).oninput = function (ev) {
-            saveValue(inputs.item(i).id, inputs.item(i).value);
-            inputs.item(i).value = getSavedValue(inputs.item(i).id);
+        inputs.item(i).value = getSavedValue(inputs.item(i).id);
+        inputs.item(i).oninput = function () {
+            saveValue(this.id, this.value);
         }
     }
 
@@ -25,6 +25,10 @@ document.addEventListener('DOMContentLoaded', function () {
         document.getElementById("email" + i).oninput = function (event) {
             changeValue("email", 3, event);
         };
+    }
+
+    for (let i = 0; i < localStorage.length; i++) {
+        console.log(localStorage.key(i), localStorage.getItem(localStorage.key(i)));
     }
 }, false);
 
