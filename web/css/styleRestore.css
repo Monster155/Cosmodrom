@@ -1,0 +1,52 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: #100F3E;
+    display: flex;
+    justify-content: center;
+}
+
+.back div {
+    position: absolute;
+    top: 150px;
+}
+
+h2 {
+    font-family: Arial;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 36px;
+    text-align: center;
+
+    color: #FFFFFF;
+}
+
+.button {
+    position: absolute;
+    width: 160px;
+    height: 70px;
+    top: 400px;
+    background-color: #4A2E87;
+
+    outline: none;
+    border: 0;
+    cursor: pointer;
+
+    font-family: Arial;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 24px;
+    text-align: center;
+
+    color: #FFFFFF;
+}
+
+.button:hover{
+    background-color: #4A2E87;
+}

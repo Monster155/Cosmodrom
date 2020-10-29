@@ -5,12 +5,12 @@ import javax.servlet.jsp.tagext.SimpleTagSupport;
 import java.io.IOException;
 import java.io.StringWriter;
 
-public class IndexContainerBtnTag extends SimpleTagSupport {
+public class ContainerBtnTag extends SimpleTagSupport {
 
     private StringWriter body;
     private String text;
 
-    public IndexContainerBtnTag() {
+    public ContainerBtnTag() {
         super();
         body = new StringWriter();
     }

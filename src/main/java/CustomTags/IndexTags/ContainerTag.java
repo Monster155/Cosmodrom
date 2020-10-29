@@ -5,7 +5,7 @@ import javax.servlet.jsp.tagext.SimpleTagSupport;
 import java.io.IOException;
 import java.io.StringWriter;
 
-public class IndexContainerTag extends SimpleTagSupport {
+public class ContainerTag extends SimpleTagSupport {
 
     private StringWriter body;
     private String method;
@@ -13,7 +13,7 @@ public class IndexContainerTag extends SimpleTagSupport {
     private String groupName;
     private String headText;
 
-    public IndexContainerTag() {
+    public ContainerTag() {
         super();
         body = new StringWriter();
     }

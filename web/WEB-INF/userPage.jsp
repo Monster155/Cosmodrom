@@ -2,40 +2,35 @@
 <html>
 <head>
     <title>Title</title>
+    <link href="/css/styleUserPage.css" rel="stylesheet" type="text/css">
 </head>
 <body>
 <img src="/imgs/data-original-cutted.jpg" id="back-img">
 <div id="background">
-    <div id="menu">
-
-    </div>
     <div id="content">
-        <table>
-            <tr>
-                <td>
-                    <div id="photo">
-                        <%--<img src="">--%>
-                    </div>
-                </td>
-                <td>
-                    <div id="description">
-                        Description
-                    </div>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <button id="btn">
+        <div id="menu">
+
+        </div>
+        <div id="main">
+            <div id="info1">
+                <div id="photo">
+                    <%--<img src=""> get info from DB by tld --%>
+                </div>
+                <div id="description">
+                    Description
+                </div>
+            </div>
+            <div id="info2">
+                <div id="btn-div">
+                    <button type="submit">
                         Open chat
                     </button>
-                </td>
-                <td>
-                    <div id="chat-list">
+                </div>
+                <div id="chat-list">
 
-                    </div>
-                </td>
-            </tr>
-        </table>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 </body>

@@ -1,4 +1,4 @@
-package CustomTags.DBObjects;
+package DBObjects;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -18,10 +18,10 @@ public class Users {
     private Users() {
         users = new ArrayList<>();
 
-        host = "jdbc:postgresql://localhost:5432/MyDB";
+        host = "jdbc:postgresql://localhost:5432/CosmodromDB";
         loginDB = "postgres";
         passwordDB = "12345678";
-        table = "products";
+        table = "users";
 
         lastWhere = "";
         lastLimit = 0;
@@ -51,6 +51,28 @@ public class Users {
         }
     }
 
+    public boolean contains(String email) {
+        try (Connection connection = DriverManager.getConnection(host, loginDB, passwordDB);
+             Statement statement = connection.createStatement()) {
+            Class.forName("org.postgresql.Driver");
+            ResultSet rs = statement.executeQuery("select * from " + table + " where email='" + email + "';");
+            return rs.next();
+        } catch (ClassNotFoundException | SQLException e) {
+            System.out.println(e.getMessage() + " : " + e.getCause());
+            return false;
+        }
+    }
+
+    public void add(String email, String password) {
+        try (Connection connection = DriverManager.getConnection(host, loginDB, passwordDB);
+             Statement statement = connection.createStatement()) {
+            Class.forName("org.postgresql.Driver");
+            statement.execute("insert into " + table + " (email, password) values ('" + email + "', '" + password + "');");
+        } catch (ClassNotFoundException | SQLException e) {
+            System.out.println(e.getMessage() + " : " + e.getCause());
+        }
+    }
+
     private void getFromDB(String where, int limit) {
         if (where == null) where = "";
         if (!where.equals("")) where = " where " + where;
@@ -77,5 +99,6 @@ public class Users {
         String description;
         String photo;
         //TODO add chat list
+        Integer[] chats;
     }
 }

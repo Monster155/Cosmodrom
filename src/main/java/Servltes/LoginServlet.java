@@ -1,6 +1,6 @@
 package Servlets;
 
-import CustomTags.DBObjects.Users;
+import DBObjects.Users;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -35,7 +35,6 @@ public class LoginServlet extends HttpServlet {
 
             req.getRequestDispatcher(prop.getProperty("chats")).forward(req, resp);
         } else {
-            //TODO save states and view
             req.getRequestDispatcher(prop.getProperty("index") + "?return=-1").forward(req, resp);
         }
     }

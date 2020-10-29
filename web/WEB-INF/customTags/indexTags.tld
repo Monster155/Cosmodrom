@@ -11,7 +11,7 @@
 
     <tag>
         <name>sidebar-button</name>
-        <tag-class>CustomTags.IndexTags.IndexSideBarBtnTag</tag-class>
+        <tag-class>CustomTags.IndexTags.SideBarBtnTag</tag-class>
         <body-content>scriptless</body-content>
         <attribute>
             <name>oninputFunctionName</name>
@@ -25,7 +25,7 @@
 
     <tag>
         <name>container</name>
-        <tag-class>CustomTags.IndexTags.IndexContainerTag</tag-class>
+        <tag-class>CustomTags.IndexTags.ContainerTag</tag-class>
         <body-content>scriptless</body-content>
         <attribute>
             <description>Set form method (POST/GET/etc)</description>
@@ -51,10 +51,36 @@
 
     <tag>
         <name>container-btn</name>
-        <tag-class>CustomTags.IndexTags.IndexContainerBtnTag</tag-class>
+        <tag-class>CustomTags.IndexTags.ContainerBtnTag</tag-class>
         <body-content>scriptless</body-content>
         <attribute>
             <name>text</name>
+            <required>true</required>
+        </attribute>
+    </tag>
+
+    <tag>
+        <name>input</name>
+        <tag-class>CustomTags.IndexTags.InputTag</tag-class>
+        <body-content>scriptless</body-content>
+        <attribute>
+            <name>id</name>
+            <required>true</required>
+        </attribute>
+        <attribute>
+            <name>inputType</name>
+            <required>true</required>
+        </attribute>
+        <attribute>
+            <name>inputPlaceholder</name>
+            <required>true</required>
+        </attribute>
+        <attribute>
+            <name>inputName</name>
+            <required>true</required>
+        </attribute>
+        <attribute>
+            <name>inputID</name>
             <required>true</required>
         </attribute>
     </tag>

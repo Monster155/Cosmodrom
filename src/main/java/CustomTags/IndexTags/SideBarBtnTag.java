@@ -5,7 +5,7 @@ import javax.servlet.jsp.tagext.SimpleTagSupport;
 import java.io.IOException;
 import java.io.StringWriter;
 
-public class IndexSideBarBtnTag extends SimpleTagSupport {
+public class SideBarBtnTag extends SimpleTagSupport {
 
     private String text;
     private StringWriter body;
@@ -19,7 +19,7 @@ public class IndexSideBarBtnTag extends SimpleTagSupport {
         this.oninputFunctionName = oninputFunctionName;
     }
 
-    public IndexSideBarBtnTag() {
+    public SideBarBtnTag() {
         super();
         body = new StringWriter();
     }

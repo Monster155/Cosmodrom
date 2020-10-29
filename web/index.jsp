@@ -3,24 +3,24 @@
 <html>
 <head>
     <title>Title</title>
-    <link href="css/styleIndex.css" rel="stylesheet" type="text/css">
+    <link href="/css/styleIndex.css" rel="stylesheet" type="text/css">
     <script>
         let url = new URL(window.location.href);
         console.log(url);
         if (url.searchParams.get("return") === "-1") alert("Invalid email or password"); //invalid email or password
         if (url.searchParams.get("return") === "-11") alert(""); //passwords don't equals
-        if (url.searchParams.get("return") === "-12") alert(""); //already registered
+        if (url.searchParams.get("return") === "-12") alert(""); //email already registered
         //TODO save input values
         if (url.searchParams.get("return") === "-13") alert(""); //doesn't match to regex
     </script>
 </head>
 <body>
 <img src="/imgs/data-original-cutted.jpg" id="back-img">
-<div class="back">
-    <div class="content">
-        <div class="side-bar">
+<div id="background">
+    <div id="content">
+        <div id="side-bar">
             <div id="choose-btn"></div>
-            <div class="side-bar-buttons">
+            <div id="side-bar-buttons">
                 <tags:sidebar-button oninputFunctionName="login()" text="Login">
                     <svg width="25px" height="25px" viewBox="0 0 16 16" class="bi bi-person-circle" fill="currentColor"
                          xmlns="http://www.w3.org/2000/svg">
@@ -30,7 +30,7 @@
                               d="M8 1a7 7 0 1 0 0 14A7 7 0 0 0 8 1zM0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8z"/>
                     </svg>
                 </tags:sidebar-button>
-                <tags:sidebar-button oninputFunctionName="register()" text="Sign In">
+                <tags:sidebar-button oninputFunctionName="registration()" text="Sign In">
                     <svg width="25px" height="25px" viewBox="0 0 16 16" class="bi bi-pencil-square" fill="currentColor"
                          xmlns="http://www.w3.org/2000/svg">
                         <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456l-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
@@ -50,16 +50,17 @@
         <div id="main">
             <div id="groups-container">
                 <tags:container action="in" method="post" groupName="login" headText="Login Here">
-                    <div class="input-area" id="login1">
+                    <tags:input id="login1" inputType="email" inputPlaceholder="E-mail"
+                                inputName="email" inputID="email1">
                         <svg width="40px" height="25px" viewBox="0 0 16 16" class="bi bi-envelope"
                              fill="currentColor"
                              xmlns="http://www.w3.org/2000/svg">
                             <path fill-rule="evenodd"
                                   d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4zm2-1a1 1 0 0 0-1 1v.217l7 4.2 7-4.2V4a1 1 0 0 0-1-1H2zm13 2.383l-4.758 2.855L15 11.114v-5.73zm-.034 6.878L9.271 8.82 8 9.583 6.728 8.82l-5.694 3.44A1 1 0 0 0 2 13h12a1 1 0 0 0 .966-.739zM1 11.114l4.758-2.876L1 5.383v5.73z"/>
                         </svg>
-                        <input type="email" placeholder="E-mail" name="email" id="email1">
-                    </div>
-                    <div class="input-area" id="login2">
+                    </tags:input>
+                    <tags:input id="login2" inputType="password" inputPlaceholder="Password"
+                                inputName="password" inputID="password1">
                         <svg width="50px" height="25px" viewBox="0 0 16 16" class="bi bi-key" fill="currentColor"
                              xmlns="http://www.w3.org/2000/svg"
                              style="transform: rotate(90deg) scale(1,-1);">
@@ -67,8 +68,7 @@
                                   d="M0 8a4 4 0 0 1 7.465-2H14a.5.5 0 0 1 .354.146l1.5 1.5a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0L13 9.207l-.646.647a.5.5 0 0 1-.708 0L11 9.207l-.646.647a.5.5 0 0 1-.708 0L9 9.207l-.646.647A.5.5 0 0 1 8 10h-.535A4 4 0 0 1 0 8zm4-3a3 3 0 1 0 2.712 4.285A.5.5 0 0 1 7.163 9h.63l.853-.854a.5.5 0 0 1 .708 0l.646.647.646-.647a.5.5 0 0 1 .708 0l.646.647.646-.647a.5.5 0 0 1 .708 0l.646.647.793-.793-1-1h-6.63a.5.5 0 0 1-.451-.285A3 3 0 0 0 4 5z"/>
                             <path d="M4 8a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"/>
                         </svg>
-                        <input type="password" placeholder="Password" name="password" id="password1">
-                    </div>
+                    </tags:input>
                     <tags:container-btn text="Login">
                         <svg width="23px" height="25px" viewBox="0 0 16 16" class="bi bi-door-open"
                              fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -81,50 +81,37 @@
                     </tags:container-btn>
                 </tags:container>
                 <tags:container action="up" method="post" groupName="register" headText="Registration">
-                    <div class="reg-row" style="position:absolute; top: 100px">
-                        <div class="input-area" id="reg1">
-                            <svg width="30px" height="30px" viewBox="0 0 16 16" class="bi bi-person"
-                                 fill="currentColor"
-                                 xmlns="http://www.w3.org/2000/svg">
-                                <path fill-rule="evenodd"
-                                      d="M10 5a2 2 0 1 1-4 0 2 2 0 0 1 4 0zM8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm6 5c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z"/>
-                            </svg>
-                            <input type="text" placeholder="Nickname" name="nickname" id="nickname2">
-                        </div>
-                        <div class="input-area" id="reg2">
-                            <svg width="40px" height="25px" viewBox="0 0 16 16" class="bi bi-envelope"
-                                 fill="currentColor"
-                                 xmlns="http://www.w3.org/2000/svg">
-                                <path fill-rule="evenodd"
-                                      d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4zm2-1a1 1 0 0 0-1 1v.217l7 4.2 7-4.2V4a1 1 0 0 0-1-1H2zm13 2.383l-4.758 2.855L15 11.114v-5.73zm-.034 6.878L9.271 8.82 8 9.583 6.728 8.82l-5.694 3.44A1 1 0 0 0 2 13h12a1 1 0 0 0 .966-.739zM1 11.114l4.758-2.876L1 5.383v5.73z"/>
-                            </svg>
-                            <input type="email" placeholder="E-mail" name="email" id="email2">
-                        </div>
-                    </div>
-                    <div class="reg-row" style="position:absolute; top: 170px">
-                        <div class="input-area" id="reg3">
-                            <svg width="50px" height="25px" viewBox="0 0 16 16" class="bi bi-key"
-                                 fill="currentColor"
-                                 xmlns="http://www.w3.org/2000/svg"
-                                 style="transform: rotate(90deg) scale(1,-1);">
-                                <path fill-rule="evenodd"
-                                      d="M0 8a4 4 0 0 1 7.465-2H14a.5.5 0 0 1 .354.146l1.5 1.5a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0L13 9.207l-.646.647a.5.5 0 0 1-.708 0L11 9.207l-.646.647a.5.5 0 0 1-.708 0L9 9.207l-.646.647A.5.5 0 0 1 8 10h-.535A4 4 0 0 1 0 8zm4-3a3 3 0 1 0 2.712 4.285A.5.5 0 0 1 7.163 9h.63l.853-.854a.5.5 0 0 1 .708 0l.646.647.646-.647a.5.5 0 0 1 .708 0l.646.647.646-.647a.5.5 0 0 1 .708 0l.646.647.793-.793-1-1h-6.63a.5.5 0 0 1-.451-.285A3 3 0 0 0 4 5z"/>
-                                <path d="M4 8a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"/>
-                            </svg>
-                            <input type="password" placeholder="Password" name="password" id="password2">
-                        </div>
-                        <div class="input-area" id="reg4">
-                            <svg width="50px" height="25px" viewBox="0 0 16 16" class="bi bi-key"
-                                 fill="currentColor"
-                                 xmlns="http://www.w3.org/2000/svg"
-                                 style="transform: rotate(90deg) scale(1,-1);">
-                                <path fill-rule="evenodd"
-                                      d="M0 8a4 4 0 0 1 7.465-2H14a.5.5 0 0 1 .354.146l1.5 1.5a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0L13 9.207l-.646.647a.5.5 0 0 1-.708 0L11 9.207l-.646.647a.5.5 0 0 1-.708 0L9 9.207l-.646.647A.5.5 0 0 1 8 10h-.535A4 4 0 0 1 0 8zm4-3a3 3 0 1 0 2.712 4.285A.5.5 0 0 1 7.163 9h.63l.853-.854a.5.5 0 0 1 .708 0l.646.647.646-.647a.5.5 0 0 1 .708 0l.646.647.646-.647a.5.5 0 0 1 .708 0l.646.647.793-.793-1-1h-6.63a.5.5 0 0 1-.451-.285A3 3 0 0 0 4 5z"/>
-                                <path d="M4 8a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"/>
-                            </svg>
-                            <input type="password" placeholder="Repeat password" name="password" id="password-repeat2">
-                        </div>
-                    </div>
+                    <tags:input id="reg1" inputType="email" inputPlaceholder="E-mail"
+                                inputName="email" inputID="email2">
+                        <svg width="40px" height="25px" viewBox="0 0 16 16" class="bi bi-envelope"
+                             fill="currentColor"
+                             xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd"
+                                  d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4zm2-1a1 1 0 0 0-1 1v.217l7 4.2 7-4.2V4a1 1 0 0 0-1-1H2zm13 2.383l-4.758 2.855L15 11.114v-5.73zm-.034 6.878L9.271 8.82 8 9.583 6.728 8.82l-5.694 3.44A1 1 0 0 0 2 13h12a1 1 0 0 0 .966-.739zM1 11.114l4.758-2.876L1 5.383v5.73z"/>
+                        </svg>
+                    </tags:input>
+                    <tags:input id="reg2" inputType="password" inputPlaceholder="Password"
+                                inputName="password" inputID="password2">
+                        <svg width="50px" height="25px" viewBox="0 0 16 16" class="bi bi-key"
+                             fill="currentColor"
+                             xmlns="http://www.w3.org/2000/svg"
+                             style="transform: rotate(90deg) scale(1,-1);">
+                            <path fill-rule="evenodd"
+                                  d="M0 8a4 4 0 0 1 7.465-2H14a.5.5 0 0 1 .354.146l1.5 1.5a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0L13 9.207l-.646.647a.5.5 0 0 1-.708 0L11 9.207l-.646.647a.5.5 0 0 1-.708 0L9 9.207l-.646.647A.5.5 0 0 1 8 10h-.535A4 4 0 0 1 0 8zm4-3a3 3 0 1 0 2.712 4.285A.5.5 0 0 1 7.163 9h.63l.853-.854a.5.5 0 0 1 .708 0l.646.647.646-.647a.5.5 0 0 1 .708 0l.646.647.646-.647a.5.5 0 0 1 .708 0l.646.647.793-.793-1-1h-6.63a.5.5 0 0 1-.451-.285A3 3 0 0 0 4 5z"/>
+                            <path d="M4 8a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"/>
+                        </svg>
+                    </tags:input>
+                    <tags:input id="reg3" inputType="password" inputPlaceholder="Repeat password"
+                                inputName="password" inputID="password-repeat2">
+                        <svg width="50px" height="25px" viewBox="0 0 16 16" class="bi bi-key"
+                             fill="currentColor"
+                             xmlns="http://www.w3.org/2000/svg"
+                             style="transform: rotate(90deg) scale(1,-1);">
+                            <path fill-rule="evenodd"
+                                  d="M0 8a4 4 0 0 1 7.465-2H14a.5.5 0 0 1 .354.146l1.5 1.5a.5.5 0 0 1 0 .708l-1.5 1.5a.5.5 0 0 1-.708 0L13 9.207l-.646.647a.5.5 0 0 1-.708 0L11 9.207l-.646.647a.5.5 0 0 1-.708 0L9 9.207l-.646.647A.5.5 0 0 1 8 10h-.535A4 4 0 0 1 0 8zm4-3a3 3 0 1 0 2.712 4.285A.5.5 0 0 1 7.163 9h.63l.853-.854a.5.5 0 0 1 .708 0l.646.647.646-.647a.5.5 0 0 1 .708 0l.646.647.646-.647a.5.5 0 0 1 .708 0l.646.647.793-.793-1-1h-6.63a.5.5 0 0 1-.451-.285A3 3 0 0 0 4 5z"/>
+                            <path d="M4 8a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"/>
+                        </svg>
+                    </tags:input>
                     <tags:container-btn text="Sign Up">
                         <svg width="23px" height="25px" viewBox="0 0 16 16" class="bi bi-door-open"
                              fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -137,15 +124,15 @@
                     </tags:container-btn>
                 </tags:container>
                 <tags:container action="rest" method="post" groupName="restore" headText="Restore Password">
-                    <div class="input-area" id="restore1">
+                    <tags:input id="restore1" inputType="email" inputPlaceholder="E-mail"
+                                inputName="email" inputID="email3">
                         <svg width="40px" height="25px" viewBox="0 0 16 16" class="bi bi-envelope"
                              fill="currentColor"
                              xmlns="http://www.w3.org/2000/svg">
                             <path fill-rule="evenodd"
                                   d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4zm2-1a1 1 0 0 0-1 1v.217l7 4.2 7-4.2V4a1 1 0 0 0-1-1H2zm13 2.383l-4.758 2.855L15 11.114v-5.73zm-.034 6.878L9.271 8.82 8 9.583 6.728 8.82l-5.694 3.44A1 1 0 0 0 2 13h12a1 1 0 0 0 .966-.739zM1 11.114l4.758-2.876L1 5.383v5.73z"/>
                         </svg>
-                        <input type="email" placeholder="E-mail" name="email" id="email3">
-                    </div>
+                    </tags:input>
                     <tags:container-btn text="Restore">
                         <svg width="40px" height="40px" viewBox="0 0 16 16" class="bi bi-arrow-repeat"
                              fill="currentColor"
@@ -160,6 +147,7 @@
         </div>
     </div>
 </div>
-<script src="js/codeIndex.js"></script>
+<script src="js/indexJS/codeIndex.js"></script>
+<script src="js/indexJS/checkPassword.js"></script>
 </body>
 </html>
