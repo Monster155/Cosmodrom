@@ -1,6 +1,6 @@
 package Servltes;
 
-import DBObjects.Users;
+import DBObjects.UsersLoginJDBC;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -22,7 +22,7 @@ public class RestoreServlet extends HttpServlet {
 
         String email = req.getParameter("email");
 
-        if (Users.here.contains(email)) {
+        if (UsersLoginJDBC.here.contains(email)) {
             //TODO send mail (code like steam guard)
             System.out.println("Sending email...");
             req.getRequestDispatcher(prop.getProperty("restore")).forward(req, resp);

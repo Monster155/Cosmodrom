@@ -5,6 +5,7 @@
     <title>Cosmodrome</title>
     <link href="/css/styleIndex.css" rel="stylesheet" type="text/css">
     <script src="js/indexJS/catchParams.js"></script>
+    <script>console.log(window.location);</script>
 </head>
 <body>
 <img src="/imgs/data-original-cutted.jpg" id="back-img">

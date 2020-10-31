@@ -1,40 +1,39 @@
 package Servltes;
 
-import javax.imageio.ImageIO;
+import DBObjects.UsersProfilesJDBC;
+
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.awt.image.BufferedImage;
-import java.io.File;
+import javax.servlet.http.*;
 import java.io.IOException;
 import java.io.InputStream;
-import java.net.URL;
 import java.util.Properties;
 
 @WebServlet("/reg")
+@MultipartConfig
 public class EditProfileServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-//TODO save to usersLogin from session
-        // and to usersProfiles
-        System.out.println(req.getParameter("fileToUpload"));
+        HttpSession session = req.getSession();
 
-        try {
-            // retrieve image
-            BufferedImage bi = ImageIO.read(new URL(req.getParameter("fileToUpload")));
-            File outputFile = new File("/imgs/saved.png");
-            ImageIO.write(bi, "png", outputFile);
-        } catch (IOException e) {
-            System.out.println(e.getMessage());
-        }
+        String name = req.getParameter("name");
+        String surname = req.getParameter("surname");
+        String description = req.getParameter("description");
+
+        Part filePart = req.getPart("photo");
+        InputStream fileContent = filePart.getInputStream();
+
+        int userID = (Integer) session.getAttribute("userID");
+        int userProfileID = UsersProfilesJDBC.here.add(userID, name, surname, description, fileContent);
+
+        session.setAttribute("profileID", userProfileID);
 
         Properties prop = new Properties();
         ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
         InputStream input = classLoader.getResourceAsStream("paths.properties");
         prop.load(input);
 
-//        req.getRequestDispatcher(prop.getProperty("userPage")).forward(req, resp);
+        req.getRequestDispatcher(prop.getProperty("chats")).forward(req, resp);
     }
 }

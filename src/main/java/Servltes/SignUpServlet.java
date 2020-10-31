@@ -1,6 +1,6 @@
 package Servltes;
 
-import DBObjects.Users;
+import DBObjects.UsersLoginJDBC;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -27,13 +27,14 @@ public class SignUpServlet extends HttpServlet {
         String password2 = req.getParameter("password-repeat");
 
         if (password.equals(password2)) {
-            if (!Users.here.contains(email)) {
-                Users.here.add(email, password);
+            if (!UsersLoginJDBC.here.contains(email)) {
+                int userID = UsersLoginJDBC.here.add(email, password);
 
+                session.setAttribute("userID", userID);
                 session.setAttribute("email", email);
                 session.setAttribute("password", password);
                 session.setAttribute("auth", true);
-                System.out.println("Ah, yes");
+                System.out.println(email + " " + password);
 
                 req.getRequestDispatcher(prop.getProperty("editProfile")).forward(req, resp);
             } else {

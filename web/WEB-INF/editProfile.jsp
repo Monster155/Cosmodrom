@@ -3,6 +3,7 @@
 <head>
     <title>Cosmodrome</title>
     <link href="/css/styleEditProfile.css" rel="stylesheet" type="text/css">
+    <script>window.history.replaceState({}, document.title, "/create-profile");</script>
 </head>
 <body>
 <img src="/imgs/data-original-cutted.jpg" id="back-img">
@@ -12,12 +13,12 @@
 
         </div>
         <div id="main">
-            <form method="post" action="/reg" id="formSave">
+            <form method="post" action="/reg" id="formSave" enctype="multipart/form-data">
                 <div id="main-elements">
                     <div id="photo">
                         <img src="/imgs/ChooseUrProfImgGroup.png" id="photo-img">
                         <input type="file" placeholder="Photo" name="photo" id="photo-input"
-                               accept="image/*" required capture>
+                               accept="image/*" capture>
                     </div>
                     <div id="inputs">
                         <div id="name" class="input-area">
@@ -40,7 +41,6 @@
         </div>
     </div>
 </div>
-<script src="/js/editProfileJS/saveImage.js"></script>
 <script src="/js/editProfileJS/inputPhoto.js"></script>
 </body>
 </html>
