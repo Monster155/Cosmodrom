@@ -64,5 +64,43 @@ input {
 
     display: flex;
     align-items: center;
-    flex-direction: column;
+    flex-direction: row;
+}
+
+#chat-list {
+    width: 200px;
+    height: 100%;
+    border-right: #4A2E87 4px solid;
+}
+
+.chatElement {
+    width: 100%;
+    height: 50px;
+
+    border-radius: 10px;
+    background: white;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    cursor: pointer;
+}
+
+.chatElement:hover{
+    background: #E3E3E3;
+}
+
+.chatElement div {
+    font-family: Arial;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 18px;
+    text-align: center;
+    color: #000;
+}
+
+#messages {
+    width: 800px;
+    height: 100%;
 }

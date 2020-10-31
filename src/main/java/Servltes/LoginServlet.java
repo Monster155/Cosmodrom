@@ -1,6 +1,7 @@
 package Servltes;
 
 import DBObjects.UsersLoginJDBC;
+import DBObjects.UsersProfilesJDBC;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -33,6 +34,7 @@ public class LoginServlet extends HttpServlet {
             session.setAttribute("email", email);
             session.setAttribute("password", password);
             session.setAttribute("userID", userID);
+            session.setAttribute("profileID", UsersProfilesJDBC.here.getUserProfileID(userID));
             session.setAttribute("auth", true);
 
             req.getRequestDispatcher(prop.getProperty("chats")).forward(req, resp);
