@@ -87,7 +87,7 @@ input {
     cursor: pointer;
 }
 
-.chatElement:hover{
+.chatElement:hover {
     background: #E3E3E3;
 }
 
@@ -100,7 +100,64 @@ input {
     color: #000;
 }
 
-#messages {
+#chat-view {
     width: 800px;
     height: 100%;
+
+    overflow: hidden;
+}
+
+#messages {
+    width: 100%;
+    height: 530px;
+
+    display: flex;
+    flex-direction: column;
+
+    overflow-y: scroll;
+}
+
+#messages::-webkit-scrollbar {
+    width: 10px;
+}
+
+/* Track */
+#messages::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 5px grey;
+    border-radius: 10px;
+}
+
+/* Handle */
+#messages::-webkit-scrollbar-thumb {
+    background: #4A2E87;
+    border-radius: 10px;
+}
+
+/* Handle on hover */
+#messages::-webkit-scrollbar-thumb:hover {
+    background: #472D73;
+}
+
+.message {
+    width: auto;
+    height: auto;
+    padding: 5px 10px;
+    margin-bottom: 10px;
+
+    background: white;
+    border-radius: 10px;
+}
+
+.message-text {
+    text-wrap: normal;
+}
+
+.timestamp {
+    font-size: 12px;
+    text-align: right;
+}
+
+#send-message {
+    width: 100%;
+    height: 100px;
 }

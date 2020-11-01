@@ -40,6 +40,9 @@ public class ListTag extends SimpleTagSupport {
         if (chatName.length() > 18) {
             chatName = chatName.substring(0, 15) + "...";
         }
-        return "<div class='chatElement' chatID='" + chatID + "'><div>" + chatName + "</div></div>";
+        return "<div " +
+                "class='chatElement' " +
+                "chatID='" + chatID + "'"  +
+                "onclick='replaceURL(this)'><div>" + chatName + "</div></div>";
     }
 }

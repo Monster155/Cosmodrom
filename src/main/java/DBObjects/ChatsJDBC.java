@@ -49,7 +49,7 @@ public class ChatsJDBC {
                 for (Integer chatID : chatsIDs) {
                     ResultSet rs = statement.executeQuery("select * from " + table + " where id=" + chatID + ";");
                     rs.next();
-                    chats.add(new Chat(rs.getInt(1), rs.getString(2)));
+                    chats.add(new Chat(rs.getInt(1), rs.getString(2), (Integer[]) rs.getArray(3).getArray()));
                 }
             return chats;
             /*ResultSet rs = statement.executeQuery("select * from " + table + " where id=" + userID + ";");
@@ -65,13 +65,47 @@ public class ChatsJDBC {
         }
     }
 
+    public ArrayList<UsersProfilesJDBC.UserProfile> getChatUsers(int chatID) {
+        try (Connection connection = DriverManager.getConnection(host, loginDB, passwordDB);
+             Statement statement = connection.createStatement()) {
+            Class.forName("org.postgresql.Driver");
+            ArrayList<UsersProfilesJDBC.UserProfile> userProfiles = new ArrayList<>();
+            ResultSet rs = statement.executeQuery("select users_id from " + table + " where id=" + chatID + ";");
+            rs.next();
+            Integer[] usersIDs = (Integer[]) rs.getArray(1).getArray();
+            for (int userID : usersIDs) {
+                userProfiles.add(UsersProfilesJDBC.here.getUserProfile(userID));
+            }
+            return userProfiles;
+        } catch (ClassNotFoundException | SQLException e) {
+            System.out.println("(C#getChatUsers) " + e.getMessage() + " : " + e.getCause());
+            return null;
+        }
+    }
+
+    public int getChatUsersCount(int chatID){
+        try (Connection connection = DriverManager.getConnection(host, loginDB, passwordDB);
+             Statement statement = connection.createStatement()) {
+            Class.forName("org.postgresql.Driver");
+
+            ResultSet rs = statement.executeQuery("select users_id from " + table + " where id=" + chatID + ";");
+            rs.next();
+            return ((Object[])rs.getArray(1).getArray()).length;
+        } catch (ClassNotFoundException | SQLException e) {
+            System.out.println("(C#getChatUsersCount) " + e.getMessage() + " : " + e.getCause());
+            return -1;
+        }
+    }
+
     public class Chat {
         private int id;
         private String name;
+        private Integer[] users_id;
 
-        public Chat(int id, String name) {
+        public Chat(int id, String name, Integer[] users_id) {
             this.id = id;
             this.name = name;
+            this.users_id = users_id;
         }
 
         public int getId() {
@@ -80,6 +114,10 @@ public class ChatsJDBC {
 
         public String getName() {
             return name;
+        }
+
+        public Integer[] getUsers_id() {
+            return users_id;
         }
     }
 }

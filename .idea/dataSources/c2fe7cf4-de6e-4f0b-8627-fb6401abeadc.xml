@@ -789,9 +789,9 @@ false Zulu
     <database id="2" parent="1" name="CosmodromDB">
       <ObjectId>25406</ObjectId>
       <Owner>postgres</Owner>
-      <IntrospectionStateNumber>8899321</IntrospectionStateNumber>
+      <IntrospectionStateNumber>8899344</IntrospectionStateNumber>
       <Current>1</Current>
-      <Relations>sequence|table|27995|27997|1
+      <Relations>sequence|table|28018|28020|1
 sequence|table|27957|27959|1
 sequence|table|27968|27970|1
 sequence|table|27984|27986|1
@@ -859,7 +859,7 @@ sequence|table|27984|27986|1
       <Comment>standard public schema</Comment>
       <StateNumber>287</StateNumber>
       <Owner>postgres</Owner>
-      <IntrospectionStateNumber>8899322</IntrospectionStateNumber>
+      <IntrospectionStateNumber>8899345</IntrospectionStateNumber>
       <Current>1</Current>
     </schema>
     <access-method id="18" parent="2" name="heap">
@@ -936,9 +936,9 @@ sequence|table|27984|27986|1
       <DataType>integer|0s</DataType>
     </sequence>
     <sequence id="31" parent="17" name="messages_id_seq">
-      <ObjectId>27995</ObjectId>
+      <ObjectId>28018</ObjectId>
       <Owner>postgres</Owner>
-      <StateNumber>8899320</StateNumber>
+      <StateNumber>8899341</StateNumber>
       <DataType>integer|0s</DataType>
     </sequence>
     <sequence id="32" parent="17" name="userslogin_id_seq">
@@ -959,9 +959,9 @@ sequence|table|27984|27986|1
       <StateNumber>8899320</StateNumber>
     </table>
     <table id="35" parent="17" name="messages">
-      <ObjectId>27997</ObjectId>
+      <ObjectId>28020</ObjectId>
       <Owner>postgres</Owner>
-      <StateNumber>8899320</StateNumber>
+      <StateNumber>8899341</StateNumber>
     </table>
     <table id="36" parent="17" name="userslogin">
       <ObjectId>27959</ObjectId>
@@ -1013,7 +1013,7 @@ sequence|table|27984|27986|1
       <Position>1</Position>
       <DataType>integer|0s</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>8899320</StateNumber>
+      <StateNumber>8899341</StateNumber>
       <DefaultExpression>nextval(&apos;messages_id_seq&apos;::regclass)</DefaultExpression>
       <TypeId>23</TypeId>
     </column>
@@ -1021,47 +1021,47 @@ sequence|table|27984|27986|1
       <Position>2</Position>
       <DataType>integer|0s</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>8899320</StateNumber>
+      <StateNumber>8899341</StateNumber>
       <TypeId>23</TypeId>
     </column>
     <column id="45" parent="35" name="text">
       <Position>3</Position>
       <DataType>text|0s</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>8899320</StateNumber>
+      <StateNumber>8899341</StateNumber>
       <TypeId>25</TypeId>
     </column>
     <column id="46" parent="35" name="sender_id">
       <Position>4</Position>
       <DataType>integer|0s</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>8899320</StateNumber>
+      <StateNumber>8899341</StateNumber>
       <TypeId>23</TypeId>
     </column>
     <column id="47" parent="35" name="timestamp">
       <Position>5</Position>
       <DataType>timestamp|0s</DataType>
-      <StateNumber>8899320</StateNumber>
+      <StateNumber>8899341</StateNumber>
       <DefaultExpression>CURRENT_TIMESTAMP</DefaultExpression>
       <TypeId>1114</TypeId>
     </column>
     <index id="48" parent="35" name="messages_pkey">
-      <ObjectId>28005</ObjectId>
-      <StateNumber>8899320</StateNumber>
+      <ObjectId>28028</ObjectId>
+      <StateNumber>8899341</StateNumber>
       <ColNames>id</ColNames>
       <Unique>1</Unique>
       <Primary>1</Primary>
     </index>
     <key id="49" parent="35" name="messages_pkey">
-      <ObjectId>28006</ObjectId>
-      <StateNumber>8899320</StateNumber>
+      <ObjectId>28029</ObjectId>
+      <StateNumber>8899341</StateNumber>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
       <UnderlyingIndexName>messages_pkey</UnderlyingIndexName>
     </key>
     <foreign-key id="50" parent="35" name="messages_chat_id_fkey">
-      <ObjectId>28012</ObjectId>
-      <StateNumber>8899320</StateNumber>
+      <ObjectId>28035</ObjectId>
+      <StateNumber>8899341</StateNumber>
       <ColNames>chat_id</ColNames>
       <RefTableId>27986</RefTableId>
       <RefColPositions>1</RefColPositions>
@@ -1070,8 +1070,8 @@ sequence|table|27984|27986|1
       <RefColNames>id</RefColNames>
     </foreign-key>
     <foreign-key id="51" parent="35" name="messages_sender_id_fkey">
-      <ObjectId>28007</ObjectId>
-      <StateNumber>8899320</StateNumber>
+      <ObjectId>28030</ObjectId>
+      <StateNumber>8899341</StateNumber>
       <ColNames>sender_id</ColNames>
       <RefTableId>27970</RefTableId>
       <RefColPositions>1</RefColPositions>

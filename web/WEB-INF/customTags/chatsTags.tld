@@ -18,7 +18,7 @@
     <tag>
         <name>messages</name>
         <tag-class>CustomTags.ChatsTags.MessagesTag</tag-class>
-        <body-content>empty</body-content>
+        <body-content>scriptless</body-content>
     </tag>
 
 </taglib>

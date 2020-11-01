@@ -45,27 +45,8 @@ public class UsersProfilesJDBC {
         }
     }
 
-    public String getJSON(int id) {
-        try (Connection connection = DriverManager.getConnection(host, loginDB, passwordDB);
-             Statement statement = connection.createStatement()) {
-            Class.forName("org.postgresql.Driver");
-            ResultSet rs = statement.executeQuery("select * from " + table + " where id='" + id + "';");
-            rs.next();
-            Integer[] chats = rs.getArray(7) != null
-                    ? (Integer[]) rs.getArray(7).getArray() : new Integer[]{};
-            UserProfile userProfile = new UserProfile(
-                    rs.getInt(1),
-                    rs.getInt(2),
-                    rs.getString(3),
-                    rs.getString(4),
-                    rs.getString(5),
-                    rs.getBytes(6),
-                    chats);
-            return userProfile.toJSON();
-        } catch (ClassNotFoundException | SQLException e) {
-            System.out.println("(UP#getJSON) " + e.getMessage() + " : " + e.getCause());
-            return null;
-        }
+    public String getJSON(int profileID) {
+        return getUserProfile(profileID).toJSON();
     }
 
     public int getUserProfileID(int userID) {
@@ -97,6 +78,29 @@ public class UsersProfilesJDBC {
         }
     }
 
+    public UserProfile getUserProfile(int profileID) {
+        try (Connection connection = DriverManager.getConnection(host, loginDB, passwordDB);
+             Statement statement = connection.createStatement()) {
+            Class.forName("org.postgresql.Driver");
+            ResultSet rs = statement.executeQuery("select * from " + table + " where id='" + profileID + "';");
+            rs.next();
+            Integer[] chats = rs.getArray(7) != null
+                    ? (Integer[]) rs.getArray(7).getArray() : new Integer[]{};
+            UserProfile userProfile = new UserProfile(
+                    rs.getInt(1),
+                    rs.getInt(2),
+                    rs.getString(3),
+                    rs.getString(4),
+                    rs.getString(5),
+                    rs.getBytes(6),
+                    chats);
+            return userProfile;
+        } catch (ClassNotFoundException | SQLException e) {
+            System.out.println("(UP#getUserProfile) " + e.getMessage() + " : " + e.getCause());
+            return null;
+        }
+    }
+
     /*public String getUsersNames(int[] ids) {
         try (Connection connection = DriverManager.getConnection(host, loginDB, passwordDB);
              Statement statement = connection.createStatement()) {
@@ -122,14 +126,14 @@ public class UsersProfilesJDBC {
         }
     }*/
 
-    private class UserProfile {
-        int id;
-        int user_id;
-        String name;
-        String surname;
-        String description;
-        String photo;
-        Integer[] chats;
+    public class UserProfile {
+        private int id;
+        private int user_id;
+        private String name;
+        private String surname;
+        private String description;
+        private String photo;
+        private Integer[] chats;
 
         public UserProfile(int id, int user_id, String name, String surname, String description, byte[] photo, Integer[] chats) {
             this.id = id;

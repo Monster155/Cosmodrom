@@ -22,12 +22,26 @@
                 </tags:list>
                 <!-- TODO jst tag that generate all divs with chat names -->
             </div>
-            <div id="messages">
-                <tags:messages/>
-                <!-- TODO show selected chat messages -->
+            <div id="chat-view">
+                <div id="messages">
+                    <tags:messages>
+                        <c:out value="${param.chat}"/>
+                    </tags:messages>
+                    <!-- TODO show selected chat messages -->
+                </div>
+                <div id="send-message">
+                    <input type="text" placeholder="Enter text..." name="text" id="send-message-input" required/>
+                    <button type="submit" id="send-message-btn"></button>
+                </div>
             </div>
         </div>
     </div>
 </div>
+<script>let profileID = ${profileID};</script>
+<script src="/js/chatsJS/alignMessagesByOwner.js"></script>
+<script src="/js/chatsJS/searchForNewMessages.js"></script>
+<script src="/js/chatsJS/hideMessageInput.js"></script>
+<script src="/js/chatsJS/selectMessage.js"></script>
+<script src="/js/chatsJS/bindChats.js"></script>
 </body>
 </html>
