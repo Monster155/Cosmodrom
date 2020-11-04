@@ -1,0 +1,133 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+input {
+    width: 80%;
+    outline: none;
+    border: 0;
+    background: #2C3C77;
+
+    font-family: Arial;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 18px;
+    color: #FFFFFF;
+    text-indent: 10px;
+}
+
+::placeholder {
+    font-weight: normal;
+    color: #DED8FF;
+}
+
+button {
+    outline: none;
+    border: 0;
+    cursor: pointer;
+
+    font-family: Arial;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 18px;
+    color: #FFFFFF;
+    text-indent: 10px;
+
+    background: #4A2E87;
+}
+
+#back-img {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+
+#background {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    /*background-color: #100F3E;*/
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+#content {
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+#menu {
+    position: relative;
+    width: 1000px;
+    height: 60px;
+
+    background: #4A2E87;
+    border-left: #4A2E87 4px solid;
+    border-right: #4A2E87 4px solid;
+
+    display: flex;
+    flex-direction: row;
+}
+
+#menu form {
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.menu-item {
+    width: 100%;
+    height: 100%;
+
+    cursor: pointer;
+    background: transparent;
+}
+
+.menu-item:hover {
+    background: #472D73;
+}
+
+.menu-item h2 {
+    font-style: normal;
+    font-weight: bold;
+    font-size: 18px;
+    color: #DED8FF;
+}
+
+#logo {
+    height: 50px;
+    border: 0;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#logo:hover {
+    background: #4A2E87;
+}
+
+#logo-img {
+    width: auto;
+    height: 100%;
+}
+
+#main {
+    position: relative;
+    width: 1000px;
+    height: 100%;
+    border-left: #4A2E87 4px solid;
+    border-right: #4A2E87 4px solid;
+    background: #100F3E;
+}
+

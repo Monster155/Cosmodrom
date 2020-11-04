@@ -1,16 +1,23 @@
-document.getElementById("photo").onclick = function () {
-    console.log("click");
-    document.getElementById("photo-input").click();
-}
-
-document.getElementById("photo-input").onchange = function (ev) {
-    if (this.files && this.files[0]) {
-        document.getElementById("photo-img").setAttribute("src",
-            window.URL.createObjectURL(this.files[0]));
-        uploadFile();
+document.addEventListener('DOMContentLoaded', function () {
+    document.getElementById("photo").onclick = function () {
+        console.log("click");
+        document.getElementById("photo-input").click();
     }
-}
-// other version but first is faster works
+
+    document.getElementById("photo-input").onchange = function (ev) {
+        if (this.files && this.files[0]) {
+            //     window.URL.createObjectURL(this.files[0]));
+            // document.getElementById("photo-img").setAttribute("src",
+
+            // now image set into div background instead <img>
+            document.getElementById("photo-img").style.display = 'none';
+            document.getElementById("photo").style.background = 'no-repeat center/contain url(' + window.URL.createObjectURL(this.files[0]) + ')';
+            document.getElementById("photo").style.backgroundSize = 'cover';
+        }
+    }
+}, false);
+
+// *** other version but first is faster works ***
 // function (ev) {
 //     //ensure a file was selected
 //     if (this.files && this.files[0]) {

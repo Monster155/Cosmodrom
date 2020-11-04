@@ -1,7 +1,10 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="menu" uri="/WEB-INF/customTags/menuTag.tld" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
     <title>Cosmodrome</title>
+    <link href="/css/mainStyle.css" rel="stylesheet" type="text/css">
     <link href="/css/styleEditProfile.css" rel="stylesheet" type="text/css">
     <script>window.history.replaceState({}, document.title, "/create-profile");</script>
 </head>
@@ -9,9 +12,9 @@
 <img src="/imgs/data-original-cutted.jpg" id="back-img">
 <div id="background">
     <div id="content">
-        <div id="menu">
-
-        </div>
+        <menu:menu>
+            <c:out value='${profileID}'/>
+        </menu:menu>
         <div id="main">
             <form method="post" action="/reg" id="formSave" enctype="multipart/form-data">
                 <div id="main-elements">

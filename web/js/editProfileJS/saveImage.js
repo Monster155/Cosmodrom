@@ -1,5 +1,5 @@
+// never used
 function uploadFile() {
-    // never used
     let blobFile = document.getElementById("photo-input").files[0];
     let data = new FormData();
     data.append("fileToUpload", blobFile);

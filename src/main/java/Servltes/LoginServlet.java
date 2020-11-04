@@ -27,12 +27,10 @@ public class LoginServlet extends HttpServlet {
         String email = req.getParameter("email");
         String password = req.getParameter("password");
 
-        System.out.println(email + " " + password);
+        System.out.println("Logined user: "+email + " " + password);
 
         int userID = UsersLoginJDBC.here.validate(email, password);
         if (userID != -1) {
-            session.setAttribute("email", email);
-            session.setAttribute("password", password);
             session.setAttribute("userID", userID);
             session.setAttribute("profileID", UsersProfilesJDBC.here.getUserProfileID(userID));
             session.setAttribute("auth", true);

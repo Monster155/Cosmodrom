@@ -1,0 +1,132 @@
+#main {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+#search {
+    width: 800px;
+    height: 120px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#formSearch {
+    width: 100%;
+    height: 80px;
+
+    border-radius: 20px;
+    background: #DED8FF;
+
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+}
+
+#search-input {
+    position: relative;
+    left: 15px;
+    width: 610px;
+    height: 60px;
+
+    border-radius: 10px 0 0 10px;
+}
+
+#search-button {
+    position: relative;
+    left: 25px;
+    width: 150px;
+    height: 60px;
+
+    border-radius: 0 10px 10px 0;
+}
+
+#results {
+    width: 800px;
+    height: 550px;
+    /* for scroll bar */
+    padding: 0 10px 0 0;
+
+    display: flex;
+    flex-direction: column;
+
+    overflow-y: auto;
+}
+
+#results::-webkit-scrollbar {
+    width: 10px;
+}
+
+/* Track */
+#results::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 5px grey;
+    border-radius: 10px;
+}
+
+/* Handle */
+#results::-webkit-scrollbar-thumb {
+    background: #4A2E87;
+    border-radius: 10px;
+}
+
+/* Handle on hover */
+#results::-webkit-scrollbar-thumb:hover {
+    background: #472D73;
+}
+
+.result {
+    margin-bottom: 10px;
+    width: 100%;
+    height: 90px;
+
+    background: #DED8FF;
+    border-radius: 20px;
+    cursor: pointer;
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.result:hover {
+    background: #C9C4E5;
+}
+
+.result-id {
+    position: relative;
+    left: 40px;
+
+    font-family: Arial;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 18px;
+    color: #000000;
+}
+
+.result-realImage {
+    position: relative;
+    left: 70px;
+    width: 70px;
+    height: 70px;
+    /* doesn't work here */
+    /*background-size: cover;*/
+}
+
+/*.result-img {*/
+/*    display: none;*/
+/*}*/
+
+.result-name {
+    position: relative;
+    left: 120px;
+    width: 550px;
+    height: auto;
+
+    font-family: Arial;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 18px;
+    color: #000000;
+}

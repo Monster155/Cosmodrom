@@ -4,6 +4,7 @@ import org.postgresql.util.Base64;
 
 import java.io.InputStream;
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.Arrays;
 
 public class UsersProfilesJDBC {
@@ -66,12 +67,13 @@ public class UsersProfilesJDBC {
         try (Connection connection = DriverManager.getConnection(host, loginDB, passwordDB);
              Statement statement = connection.createStatement()) {
             Class.forName("org.postgresql.Driver");
+            System.out.println("UP#getUserChats: " + "select chats from " + table + " where id=" + userProfileID + ";");
             ResultSet rs = statement.executeQuery("select chats from " + table + " where id=" + userProfileID + ";");
             rs.next();
 //            System.out.println(rs.toString());
             if (rs.getArray(1) != null)
                 return (Integer[]) rs.getArray(1).getArray();
-            return null;
+            return new Integer[]{-1};
         } catch (ClassNotFoundException | SQLException e) {
             System.out.println("(UP#getUserChats) " + e.getMessage() + " : " + e.getCause());
             return null;
@@ -101,30 +103,70 @@ public class UsersProfilesJDBC {
         }
     }
 
-    /*public String getUsersNames(int[] ids) {
+    public ArrayList<UserProfile> getUsersProfiles(int[] ids) {
         try (Connection connection = DriverManager.getConnection(host, loginDB, passwordDB);
              Statement statement = connection.createStatement()) {
             Class.forName("org.postgresql.Driver");
-            StringBuilder names = new StringBuilder();
-
-            for (int id : ids) {
-                names.append(
-                        statement.executeQuery("select names from " + table + " where id='" + id + "';")
-                                .getString(1) + ", ");
+            StringBuilder idSB = new StringBuilder();
+            idSB.append(ids[0]);
+            for (int i = 1; i < ids.length; i++) {
+                idSB.append(", " + ids[i]);
             }
 
-            return names.toString();
-
-            // TODO wait Azat's answer
-//            ResultSet rs = statement.executeQuery("select names from " + table + " where id='" + id + "';");
-//            while (rs.next()) {
-//                names.append(rs.getString(1) + ", ");
-//            }
+            ResultSet rs = statement.executeQuery("select * from " + table + " where id=any(array[" + idSB.toString() + "]);");
+            return generateArrayList(rs);
         } catch (ClassNotFoundException | SQLException e) {
             System.out.println("(UP#getUsersNames) " + e.getMessage() + " : " + e.getCause());
             return null;
         }
-    }*/
+    }
+
+    public ArrayList<UserProfile> getUsersProfiles(String name) {
+        try (Connection connection = DriverManager.getConnection(host, loginDB, passwordDB);
+             Statement statement = connection.createStatement()) {
+            Class.forName("org.postgresql.Driver");
+            name = DBObjectUtils.shieldText(name);
+            //TODO make it better (example: Damir Dav, Dav Damir, Damir, Dav)
+            ResultSet rs = statement.executeQuery("select * from " + table +
+                    " where surname='" + name + "' or name='" + name + "';");
+            return generateArrayList(rs);
+        } catch (ClassNotFoundException | SQLException e) {
+            System.out.println("(UP#getUsersNames) " + e.getMessage() + " : " + e.getCause());
+            return null;
+        }
+    }
+
+    public boolean addUsersToChat(int[] profileID, int chatID) {
+        try (Connection connection = DriverManager.getConnection(host, loginDB, passwordDB);
+             Statement statement = connection.createStatement()) {
+            Class.forName("org.postgresql.Driver");
+
+            String profileIDStr = DBObjectUtils.strFromIntArray(profileID);
+
+            return statement.execute("update " + table +
+                    " set chats = chats || '{" + chatID + "}' WHERE id = ANY (ARRAY [" + profileIDStr + "]);");
+        } catch (ClassNotFoundException | SQLException e) {
+            System.out.println("(UP#getUserProfile) " + e.getMessage() + " : " + e.getCause());
+            return false;
+        }
+    }
+
+    private ArrayList<UserProfile> generateArrayList(ResultSet rs) throws SQLException {
+        ArrayList<UserProfile> userProfiles = new ArrayList<>();
+        while (rs.next()) {
+            Integer[] chats = rs.getArray(7) != null
+                    ? (Integer[]) rs.getArray(7).getArray() : new Integer[]{};
+            userProfiles.add(new UserProfile(
+                    rs.getInt(1),
+                    rs.getInt(2),
+                    rs.getString(3),
+                    rs.getString(4),
+                    rs.getString(5),
+                    rs.getBytes(6),
+                    chats));
+        }
+        return userProfiles;
+    }
 
     public class UserProfile {
         private int id;
@@ -168,6 +210,34 @@ public class UsersProfilesJDBC {
                     ", \"photo\":\"" + photo + '\"' +
                     ", \"chats\":" + Arrays.toString(chats) +
                     "}";
+        }
+
+        public int getProfileID() {
+            return id;
+        }
+
+        public int getLoginID() {
+            return user_id;
+        }
+
+        public String getName() {
+            return name;
+        }
+
+        public String getSurname() {
+            return surname;
+        }
+
+        public String getDescription() {
+            return description;
+        }
+
+        public String getPhoto() {
+            return photo;
+        }
+
+        public Integer[] getChats() {
+            return chats;
         }
     }
 }

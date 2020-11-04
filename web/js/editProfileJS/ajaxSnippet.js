@@ -1,3 +1,4 @@
+//never used
 let ajax = {};
 ajax.x = function () {
     if (typeof XMLHttpRequest !== 'undefined') {

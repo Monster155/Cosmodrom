@@ -25,13 +25,13 @@ public class MessagesTag extends SimpleTagSupport {
     public void doTag() throws JspException, IOException {
         getJspBody().invoke(body);
         String chatIDStr = body.toString().trim();
-        System.out.println("Chat ID " + chatIDStr);
+        System.out.println("ChatID in MessageTag: " + chatIDStr);
         if (chatIDStr.equals("")) {
             return;
         }
         int chatID = Integer.parseInt(chatIDStr);
 
-        ArrayList<MessagesJDBC.Message> messages = MessagesJDBC.here.getMessages(chatID);
+        ArrayList<MessagesJDBC.Message> messages = MessagesJDBC.here.getMessages(chatID, 0);
         if (ChatsJDBC.here.getChatUsersCount(chatID) > 2) {
             ArrayList<UsersProfilesJDBC.UserProfile> userProfiles = ChatsJDBC.here.getChatUsers(chatID);
         }

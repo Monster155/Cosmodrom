@@ -23,8 +23,9 @@ public class UsersLoginJDBC {
              Statement statement = connection.createStatement()) {
             Class.forName("org.postgresql.Driver");
             ResultSet rs = statement.executeQuery("select * from " + table + " where email='" + email + "';");
-            rs.next();
-            //TODO hash pass
+            if (!rs.next()) return -1;
+
+            password = String.valueOf(hashPass(password));
             if (rs.getString("password").equals(password))
                 return rs.getInt("id");
             else return -1;
@@ -42,14 +43,31 @@ public class UsersLoginJDBC {
             return rs.next();
         } catch (ClassNotFoundException | SQLException e) {
             System.out.println("(UL#contains) " + e.getMessage() + " : " + e.getCause());
-            return false;
+            //TODO what type is better? True or False?
+            return true;
         }
+    }
+
+    private long hashPass(String password) {
+        long hash = 0;
+        // pass
+        for (int i = 0; i < password.length(); i++) {
+            hash = hash * 197 + password.charAt(i);
+        }
+        // salt
+        for (int i = 6; i < password.length(); i += 3) { //pass min 8 characters
+            hash = hash * 197 + password.charAt(i);
+        }
+        return hash;
     }
 
     public int add(String email, String password) {
         try (Connection connection = DriverManager.getConnection(host, loginDB, passwordDB);
              Statement statement = connection.createStatement()) {
             Class.forName("org.postgresql.Driver");
+
+            password = String.valueOf(hashPass(password));
+
             ResultSet rs = statement.executeQuery("insert into " + table + " (email, password) " +
                     "values ('" + email + "', '" + password + "') returning id;");
             rs.next();

@@ -28,21 +28,24 @@ public class SignUpServlet extends HttpServlet {
 
         if (password.equals(password2)) {
             if (!UsersLoginJDBC.here.contains(email)) {
-                int userID = UsersLoginJDBC.here.add(email, password);
+                if (password.matches("^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,20}$")) {
+                    int userID = UsersLoginJDBC.here.add(email, password);
 
-                session.setAttribute("userID", userID);
-                session.setAttribute("email", email);
-                session.setAttribute("password", password);
-                session.setAttribute("auth", true);
-                System.out.println(email + " " + password);
+                    session.setAttribute("userID", userID);
+                    session.setAttribute("auth", true);
+                    System.out.println("Registered user: " + email + " " + password);
 
-                req.getRequestDispatcher(prop.getProperty("editProfile")).forward(req, resp);
+                    req.getRequestDispatcher(prop.getProperty("editProfile")).forward(req, resp);
+                } else {
+                    System.out.println("Password doesn't match regex: " + email);
+                    resp.sendRedirect(prop.getProperty("index") + "?return=-13");
+                }
             } else {
-                System.out.println(email);
+                System.out.println("Entered email contains in DB: " + email);
                 resp.sendRedirect(prop.getProperty("index") + "?return=-12");
             }
         } else {
-            System.out.println(password + " " + password2);
+            System.out.println("Entered password don't equal " + password + " " + password2);
             resp.sendRedirect(prop.getProperty("index") + "?return=-11");
         }
     }

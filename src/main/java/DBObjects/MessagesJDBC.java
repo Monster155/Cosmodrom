@@ -19,30 +19,34 @@ public class MessagesJDBC {
         table = "messages";
     }
 
-//    public int add() {
-//        try (Connection connection = DriverManager.getConnection(host, loginDB, passwordDB);
-//             Statement statement = connection.createStatement()) {
-//            Class.forName("org.postgresql.Driver");
-//            ResultSet rs = statement.executeQuery("insert into " + table + " (email, password) " +
-//                    "values ('" + email + "', '" + password + "') returning id;");
-//            rs.next();
-//            return rs.getInt(1);
-//        } catch (ClassNotFoundException | SQLException e) {
-//            System.out.println("(M#add) " + e.getMessage() + " : " + e.getCause());
-//            return -1;
-//        }
-//    }
+    public boolean add(int chatID, String text, int senderID) {
+        try (Connection connection = DriverManager.getConnection(host, loginDB, passwordDB);
+             Statement statement = connection.createStatement()) {
+            Class.forName("org.postgresql.Driver");
+            if (text.equals("")) return false;
 
-    //TODO update
-    //TODO delete
-    //TODO get
+            text = DBObjectUtils.shieldText(text);
+            System.out.println("insert into " + table + chatID +
+                    " (text, sender_id) values ('" + text + "', " + senderID + ");");
+            return statement.execute("insert into " + table + chatID +
+                    " (text, sender_id) values ('" + text + "', " + senderID + ");");
+        } catch (ClassNotFoundException | SQLException e) {
+            System.out.println("(M#add) " + e.getMessage() + " : " + e.getCause());
+            return false;
+        }
+    }
 
-    public ArrayList<Message> getMessages(int chatID) {
+    public ArrayList<Message> getMessages(int chatID, int limit) {
         try (Connection connection = DriverManager.getConnection(host, loginDB, passwordDB);
              Statement statement = connection.createStatement()) {
             Class.forName("org.postgresql.Driver");
             ArrayList<Message> messages = new ArrayList<>();
-            ResultSet rs = statement.executeQuery("select * from " + table + " where chat_id=" + chatID + ";");
+            ResultSet rs;
+            //TODO make loading only last X messages, timestamp inverted, so u only need LIMIT
+            if (limit <= 0)
+                rs = statement.executeQuery("select * from " + table + chatID + " order by timestamp desc;");
+            else
+                rs = statement.executeQuery("select * from " + table + chatID + " order by timestamp desc limit " + limit + ";");
             while (rs.next()) {
                 messages.add(new Message(
                         rs.getInt(1),
@@ -55,6 +59,46 @@ public class MessagesJDBC {
         } catch (ClassNotFoundException | SQLException e) {
             System.out.println("(M#getMessages) " + e.getMessage() + " : " + e.getCause());
             return null;
+        }
+    }
+
+    public int getMessagesCount(int chatID) {
+        try (Connection connection = DriverManager.getConnection(host, loginDB, passwordDB);
+             Statement statement = connection.createStatement()) {
+            Class.forName("org.postgresql.Driver");
+            ArrayList<Message> messages = new ArrayList<>();
+            ResultSet rs = statement.executeQuery("select count(id) from " + table + chatID + ";");
+            rs.next();
+            return rs.getInt(1);
+        } catch (ClassNotFoundException | SQLException e) {
+            System.out.println("(M#getMessages) " + e.getMessage() + " : " + e.getCause());
+            return -1;
+        }
+    }
+
+//    public boolean update(int chatID, String newText, int senderID) {
+// TODO update
+//    }
+    //TODO delete
+
+    public boolean createTable(int chatID) {
+        try (Connection connection = DriverManager.getConnection(host, loginDB, passwordDB);
+             Statement statement = connection.createStatement()) {
+            Class.forName("org.postgresql.Driver");
+
+            return statement.execute("" +
+                    "create table messages" + chatID + "(" +
+                    "            id        serial primary key," +
+                    "            chat_id   int  default " + chatID + "," +
+                    "            text      text not null," +
+                    "            sender_id int  not null," +
+                    "            timestamp timestamp default current_timestamp," +
+                    "            foreign key (sender_id) references usersProfiles (id) on delete no action," +
+                    "            foreign key (chat_id) references chats (id) on delete no action" +
+                    "        );");
+        } catch (ClassNotFoundException | SQLException e) {
+            System.out.println("(M#createTable) " + e.getMessage() + " : " + e.getCause());
+            return false;
         }
     }
 

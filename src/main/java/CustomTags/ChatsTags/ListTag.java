@@ -20,7 +20,7 @@ public class ListTag extends SimpleTagSupport {
     @Override
     public void doTag() throws JspException, IOException {
         getJspBody().invoke(body);
-        System.out.println(body.toString().trim());
+        System.out.println("UserProfileID in ListTag from body: "+body.toString().trim());
 
         ArrayList<ChatsJDBC.Chat> chats = ChatsJDBC.here.getUserChats(Integer.parseInt(body.toString().trim()));
         StringBuilder textToPrint = new StringBuilder();

@@ -16,13 +16,13 @@ import java.util.Properties;
 public class UserPageServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        System.out.println(req.getParameter("get"));
+        System.out.println("Servlet:'/user' Param 'get': "+req.getParameter("get"));
         if (req.getParameter("get") != null) {
             HttpSession session = req.getSession();
 
             String userProfileJson = "";
-            System.out.println(req.getParameter("id"));
-            System.out.println((int) session.getAttribute("profileID"));
+            System.out.println("Servlet:'/user' Param 'id': "+req.getParameter("id"));
+            System.out.println("Session get profileID: "+(int) session.getAttribute("profileID"));
             if (req.getParameter("id") == "") {
                 userProfileJson = UsersProfilesJDBC.here.getJSON(
                         (int) session.getAttribute("profileID"));
@@ -30,7 +30,7 @@ public class UserPageServlet extends HttpServlet {
                 userProfileJson = UsersProfilesJDBC.here.getJSON(
                         Integer.parseInt(req.getParameter("id")));
             }
-            System.out.println(userProfileJson.substring(0, 20));
+            System.out.println("UserProfileJSON: "+userProfileJson.substring(0, 20)+" ...");
 
             resp.setContentType("application/json");
             resp.setCharacterEncoding("UTF-8");
