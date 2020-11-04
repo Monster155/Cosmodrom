@@ -1,5 +1,3 @@
-// TODO this
-// CRUD
 let selectedMessage = document.getElementById('messages');
 let canChange = true;
 

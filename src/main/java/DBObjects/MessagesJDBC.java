@@ -75,7 +75,6 @@ public class MessagesJDBC {
         }
     }
 
-    // TODO update
     public boolean update(int messageID, String newText, int chatID) {
         try (Connection connection = DriverManager.getConnection(host, loginDB, passwordDB);
              Statement statement = connection.createStatement()) {
@@ -86,7 +85,6 @@ public class MessagesJDBC {
             return false;
         }
     }
-    //TODO delete
 
     public boolean delete(int messageID, int chatID) {
         try (Connection connection = DriverManager.getConnection(host, loginDB, passwordDB);

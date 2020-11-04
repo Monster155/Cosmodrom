@@ -1,6 +1,10 @@
 function replaceURL(e) {
-    window.history.replaceState({}, document.title, "/m?chatID=" + e.getAttribute('chatID'));
-    document.getElementById('messages').innerHTML = '';
-    searchForNewMessages();
-    unhideMessages();
+    let chatID = e.getAttribute('chatID');
+    const urlParams = new URLSearchParams(window.location.search);
+    window.history.replaceState({}, document.title, "/m?chatID=" + chatID);
+    if (chatID !== urlParams.get('chatID')) {
+        document.getElementById('messages').innerHTML = '';
+        searchForNewMessages();
+        unhideMessages();
+    }
 }
