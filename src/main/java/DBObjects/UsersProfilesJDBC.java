@@ -27,8 +27,7 @@ public class UsersProfilesJDBC {
         try (Connection connection = DriverManager.getConnection(host, loginDB, passwordDB);
              PreparedStatement statement = connection.prepareStatement(
                      "insert into " + table + " (user_id, name, surname, description, photo)" +
-                             " values (?, ?, ?, ?, ?) returning id;"
-             )) {
+                             " values (?, ?, ?, ?, ?) returning id;")) {
             Class.forName("org.postgresql.Driver");
 
             statement.setInt(1, userID);
@@ -49,8 +48,7 @@ public class UsersProfilesJDBC {
     public boolean update(int profileID, String name, String surname, String description, InputStream photoIS) {
         try (Connection connection = DriverManager.getConnection(host, loginDB, passwordDB);
              PreparedStatement statement = connection.prepareStatement(
-                     "update usersProfiles set name=?, surname=?, description=?, photo=? where id=?;"
-             )) {
+                     "update " + table + " set name=?, surname=?, description=?, photo=? where id=?;")) {
             Class.forName("org.postgresql.Driver");
 
             statement.setString(1, name);
@@ -69,8 +67,7 @@ public class UsersProfilesJDBC {
     public boolean update(int profileID, String name, String surname, String description) {
         try (Connection connection = DriverManager.getConnection(host, loginDB, passwordDB);
              PreparedStatement statement = connection.prepareStatement(
-                     "update usersProfiles set name=?, surname=?, description=? where id=?;"
-             )) {
+                     "update " + table + " set name=?, surname=?, description=? where id=?;")) {
             Class.forName("org.postgresql.Driver");
 
             statement.setString(1, name);

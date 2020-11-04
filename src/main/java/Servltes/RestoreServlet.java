@@ -1,6 +1,7 @@
 package Servltes;
 
 import DBObjects.UsersLoginJDBC;
+import RestoreSendingEmail.SendingEmail;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -21,13 +22,14 @@ public class RestoreServlet extends HttpServlet {
         prop.load(input);
 
         String email = req.getParameter("email");
+        req.getRequestDispatcher(prop.getProperty("restore")).forward(req, resp);
 
-        if (UsersLoginJDBC.here.contains(email)) {
-            // TODO send mail (code like steam guard)
+        int profileID = UsersLoginJDBC.here.getUser(email);
+        System.out.println(profileID);
+        if (profileID > 0) {
+            String newPass = UsersLoginJDBC.here.restore(profileID);
+            SendingEmail.here.sendMessage("Restore Password", "Your new password " + newPass, email);
             System.out.println("Sending email...");
-            req.getRequestDispatcher(prop.getProperty("restore")).forward(req, resp);
-        } else {
-            req.getRequestDispatcher(prop.getProperty("restore")).forward(req, resp);
         }
     }
 }

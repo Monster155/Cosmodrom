@@ -38,6 +38,7 @@ public class EditProfileServlet extends HttpServlet {
 
             session.setAttribute("userID", userID);
             session.setAttribute("profileID", userProfileID);
+            session.setAttribute("auth", true);
 
             req.getRequestDispatcher(prop.getProperty("chats")).forward(req, resp);
         } else {

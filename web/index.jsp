@@ -73,6 +73,10 @@
                         </svg>
                     </tags:container-btn>
                 </tags:container>
+                <button class="oauth-button" id="oauth-login"
+                        onclick="window.location.replace(window.location.origin + '/oauth?login');">
+                    VK
+                </button>
                 <tags:container action="up" method="post" groupName="register" headText="Registration">
                     <tags:input id="reg1" inputType="email" inputPlaceholder="E-mail"
                                 inputName="email" inputID="email2">
@@ -116,6 +120,10 @@
                         </svg>
                     </tags:container-btn>
                 </tags:container>
+                <button class="oauth-button" id="oauth-reg"
+                        onclick="window.location.replace(window.location.origin + '/oauth?reg');">
+                    VK
+                </button>
                 <tags:container action="rest" method="post" groupName="restore" headText="Restore Password">
                     <tags:input id="restore1" inputType="email" inputPlaceholder="E-mail"
                                 inputName="email" inputID="email3">
