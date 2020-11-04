@@ -1,3 +1,5 @@
+#Create tables with PostgreSQL:
+
 create table usersLogin
 (
     id       serial primary key,
@@ -23,3 +25,5 @@ create table chats
     name     text  not null,
     users_id int[] not null
 );
+
+#Add jars from TomcatJARS folder to your Tomcat's lib
