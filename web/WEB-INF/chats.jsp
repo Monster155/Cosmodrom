@@ -29,6 +29,23 @@
                         <c:out value="${param.chat}"/>
                     </tags:messages>
                 </div>
+                <div id="change">
+                    <button id="edit-button" class="change-buttons" onclick="editMessage()">
+                        <div>
+                            Edit
+                        </div>
+                    </button>
+                    <button id="delete-button" class="change-buttons" onclick="deleteMessage()">
+                        <div>
+                            Delete
+                        </div>
+                    </button>
+                    <button id="close-button" class="change-buttons" onclick="deselectMessage()">
+                        <div>
+                            X
+                        </div>
+                    </button>
+                </div>
                 <div id="send-message-background">
                     <div id="send-message">
                         <input type="text" placeholder="Enter text..." name="text" id="send-message-input" required/>
@@ -43,11 +60,14 @@
 </div>
 <!-- script has methods # script uses methods -->
 <script>let profileID = ${profileID};</script> <!-- # -->
+<script>let isChanging = false;</script> <!-- # -->
 <script src="/js/chatsJS/triggerButtonOnEnterPressed.js"></script> <!-- # -->
+<script src="/js/chatsJS/showChangeButtons.js"></script> <!-- showChangeButtons, hideChangeButtons # -->
+<script src="/js/chatsJS/changeMessage.js"></script> <!-- editMessage, deleteMessage # -->
 <script src="/js/chatsJS/alignMessagesByOwner.js"></script> <!-- alignMessages # -->
 <script src="/js/chatsJS/hideMessageInput.js"></script> <!-- hideMessages, unhideMessages # -->
-<script src="/js/chatsJS/selectMessage.js"></script> <!-- selectMessage # showChangeButtons -->
-<script src="/js/chatsJS/searchForNewMessages.js"></script> <!-- searchForNewMessages # alignMessages, selectMessage(var) -->
+<script src="/js/chatsJS/selectMessage.js"></script> <!-- selectMessage, deselectMessage # show(hide)ChangeButtons -->
+<script src="/js/chatsJS/searchForNewMessages.js"></script> <!-- searchForNewMessages # alignMessages, selMesVar -->
 <script src="/js/chatsJS/sendMessage.js"></script> <!-- sendMessage # searchForNewMessages -->
 <script src="/js/chatsJS/bindChats.js"></script> <!-- replaceURL # searchForNewMessages, unhideMessages -->
 </body>

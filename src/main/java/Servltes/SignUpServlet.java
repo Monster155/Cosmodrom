@@ -29,9 +29,8 @@ public class SignUpServlet extends HttpServlet {
         if (password.equals(password2)) {
             if (!UsersLoginJDBC.here.contains(email)) {
                 if (password.matches("^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,20}$")) {
-                    int userID = UsersLoginJDBC.here.add(email, password);
-
-                    session.setAttribute("userID", userID);
+                    session.setAttribute("email", email);
+                    session.setAttribute("password", password);
                     session.setAttribute("auth", true);
                     System.out.println("Registered user: " + email + " " + password);
 

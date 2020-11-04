@@ -110,13 +110,7 @@
     left: 70px;
     width: 70px;
     height: 70px;
-    /* doesn't work here */
-    /*background-size: cover;*/
 }
-
-/*.result-img {*/
-/*    display: none;*/
-/*}*/
 
 .result-name {
     position: relative;

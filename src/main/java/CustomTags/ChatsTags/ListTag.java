@@ -36,7 +36,6 @@ public class ListTag extends SimpleTagSupport {
     }
 
     private String getChatElementDiv(String chatName, int chatID) {
-        //TODO make substring+"..." if name length > 10
         if (chatName.length() > 18) {
             chatName = chatName.substring(0, 15) + "...";
         }

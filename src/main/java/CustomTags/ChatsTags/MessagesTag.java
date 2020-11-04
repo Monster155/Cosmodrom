@@ -52,7 +52,7 @@ public class MessagesTag extends SimpleTagSupport {
     }
 
 //    private String getChatElementWithPhotoDiv(String text, int messageID, Photo senderPhoto) {
-//        //TODO rewrite this
+//        //TODO write this
 //        return "<div class='message' messageID='" + messageID + "' onclick='" + "'>" +
 //                "<div class='message-img'><img src='" + senderPhoto + "'></div>" +
 //                "<div class='message-text'>" + text + "</div>" +

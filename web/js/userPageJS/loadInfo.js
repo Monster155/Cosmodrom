@@ -27,13 +27,13 @@ xmlhttp.send();
 function myFunction(arr) {
     console.log(arr);
     window.history.replaceState({}, document.title, "/user?id=" + arr.id);
+    if (arr.id === profileID) document.getElementById("info3").style.display = 'block';
     // image
     if (arr.photo) {
         document.getElementById("photo-img").src = "data: image/png; base64, " + arr.photo;
         document.getElementById("photo-img").style.display = 'none';
-        document.getElementById("photo").style.background = 'no-repeat center/contain url(' +
+        document.getElementById("photo").style.background = 'no-repeat center/cover url(' +
             '"data: image/png; base64, ' + arr.photo + '")';
-        document.getElementById("photo").style.backgroundSize = 'cover';
     } else {
         document.getElementById("photo-img").src = "/imgs/space7.jpg";
     }

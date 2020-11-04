@@ -42,7 +42,6 @@ public class MessagesJDBC {
             Class.forName("org.postgresql.Driver");
             ArrayList<Message> messages = new ArrayList<>();
             ResultSet rs;
-            //TODO make loading only last X messages, timestamp inverted, so u only need LIMIT
             if (limit <= 0)
                 rs = statement.executeQuery("select * from " + table + chatID + " order by timestamp desc;");
             else
@@ -76,10 +75,29 @@ public class MessagesJDBC {
         }
     }
 
-//    public boolean update(int chatID, String newText, int senderID) {
-// TODO update
-//    }
+    // TODO update
+    public boolean update(int messageID, String newText, int chatID) {
+        try (Connection connection = DriverManager.getConnection(host, loginDB, passwordDB);
+             Statement statement = connection.createStatement()) {
+            Class.forName("org.postgresql.Driver");
+            return statement.execute("update " + table + chatID + " set text='" + newText + "' where id=" + messageID + ";");
+        } catch (ClassNotFoundException | SQLException e) {
+            System.out.println("(M#update) " + e.getMessage() + " : " + e.getCause());
+            return false;
+        }
+    }
     //TODO delete
+
+    public boolean delete(int messageID, int chatID) {
+        try (Connection connection = DriverManager.getConnection(host, loginDB, passwordDB);
+             Statement statement = connection.createStatement()) {
+            Class.forName("org.postgresql.Driver");
+            return statement.execute("delete from " + table + chatID + " where id=" + messageID + ";");
+        } catch (ClassNotFoundException | SQLException e) {
+            System.out.println("(M#delete) " + e.getMessage() + " : " + e.getCause());
+            return false;
+        }
+    }
 
     public boolean createTable(int chatID) {
         try (Connection connection = DriverManager.getConnection(host, loginDB, passwordDB);

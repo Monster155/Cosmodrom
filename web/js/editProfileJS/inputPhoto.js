@@ -6,16 +6,20 @@ document.addEventListener('DOMContentLoaded', function () {
 
     document.getElementById("photo-input").onchange = function (ev) {
         if (this.files && this.files[0]) {
-            //     window.URL.createObjectURL(this.files[0]));
-            // document.getElementById("photo-img").setAttribute("src",
-
-            // now image set into div background instead <img>
-            document.getElementById("photo-img").style.display = 'none';
-            document.getElementById("photo").style.background = 'no-repeat center/contain url(' + window.URL.createObjectURL(this.files[0]) + ')';
-            document.getElementById("photo").style.backgroundSize = 'cover';
+            setImage(window.URL.createObjectURL(this.files[0]));
         }
     }
 }, false);
+
+function setImage(image) {
+    //     window.URL.createObjectURL(this.files[0]));
+    // document.getElementById("photo-img").setAttribute("src",
+
+    // now image set into div background instead <img>
+    document.getElementById("photo-img").style.display = 'none';
+    document.getElementById("photo").style.background = 'no-repeat center/cover url("' + image + '")';
+    console.log('no-repeat center/cover url("' + image + '")');
+}
 
 // *** other version but first is faster works ***
 // function (ev) {

@@ -21,16 +21,35 @@ public class ChatsServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String chatID = req.getParameter("chatID");
-        String text = req.getParameter("text");
-        String profileID = req.getParameter("profileID");
-        System.out.println("(ChatsServlet#add) chatID='" + chatID + " profileID=" + profileID + "' text='" + text + "'");
-
-        MessagesJDBC.here.add(
-                Integer.parseInt(chatID),
-                text.trim(),
-                Integer.parseInt(profileID)
-        );
+        if (req.getParameter("update") != null) {
+            System.out.println("update");
+            Integer messageID = Integer.parseInt(req.getParameter("messageID"));
+            Integer senderID = Integer.parseInt(req.getParameter("senderID"));
+            Integer chatID = Integer.parseInt(req.getParameter("chatID"));
+            String text = req.getParameter("text");
+            if (req.getSession().getAttribute("profileID").equals(senderID))
+                MessagesJDBC.here.update(messageID, text, chatID);
+        } else {
+            if (req.getParameter("delete") != null) {
+                System.out.println("delete");
+                Integer messageID = Integer.parseInt(req.getParameter("messageID"));
+                Integer senderID = Integer.parseInt(req.getParameter("senderID"));
+                Integer chatID = Integer.parseInt(req.getParameter("chatID"));
+                if (req.getSession().getAttribute("profileID").equals(senderID))
+                    MessagesJDBC.here.delete(messageID, chatID);
+            } else {
+                System.out.println("add");
+                String chatID = req.getParameter("chatID");
+                String text = req.getParameter("text");
+                String profileID = req.getParameter("profileID");
+                System.out.println("(ChatsServlet#add) chatID='" + chatID + " profileID=" + profileID + "' text='" + text + "'");
+                MessagesJDBC.here.add(
+                        Integer.parseInt(chatID),
+                        text.trim(),
+                        Integer.parseInt(profileID)
+                );
+            }
+        }
     }
 
     @Override
@@ -55,8 +74,8 @@ public class ChatsServlet extends HttpServlet {
             Integer messagesFront = Integer.parseInt(req.getParameter("sync"));
             Integer messagesBack = MessagesJDBC.here.getMessagesCount(chatID);
 
-            System.out.println("/m messagesFront: " + messagesFront);
-            System.out.println("/m messagesBack: " + messagesBack);
+//            System.out.println("/m messagesFront: " + messagesFront);
+//            System.out.println("/m messagesBack: " + messagesBack);
             if (messagesBack > messagesFront) {
                 int limit = messagesBack - messagesFront;
                 System.out.println("/m limit: " + limit);
@@ -67,8 +86,6 @@ public class ChatsServlet extends HttpServlet {
                 for (MessagesJDBC.Message message : messages) {
                     System.out.println(message.getId() + " " + messages.indexOf(message));
                 }
-                //TODO
-//                List<MessagesJDBC.Message> shortMessages = messages.subList(messagesFront, messages.size());
 
                 StringBuilder textToPrint = new StringBuilder();
                 for (MessagesJDBC.Message message : messages) {

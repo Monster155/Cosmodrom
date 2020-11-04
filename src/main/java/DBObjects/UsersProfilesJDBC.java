@@ -46,6 +46,45 @@ public class UsersProfilesJDBC {
         }
     }
 
+    public boolean update(int profileID, String name, String surname, String description, InputStream photoIS) {
+        try (Connection connection = DriverManager.getConnection(host, loginDB, passwordDB);
+             PreparedStatement statement = connection.prepareStatement(
+                     "update usersProfiles set name=?, surname=?, description=?, photo=? where id=?;"
+             )) {
+            Class.forName("org.postgresql.Driver");
+
+            statement.setString(1, name);
+            statement.setString(2, surname);
+            statement.setString(3, description);
+            statement.setBinaryStream(4, photoIS);
+            statement.setInt(5, profileID);
+
+            return statement.execute();
+        } catch (ClassNotFoundException | SQLException e) {
+            System.out.println("(UP#update) " + e.getMessage() + " : " + e.getCause());
+            return false;
+        }
+    }
+
+    public boolean update(int profileID, String name, String surname, String description) {
+        try (Connection connection = DriverManager.getConnection(host, loginDB, passwordDB);
+             PreparedStatement statement = connection.prepareStatement(
+                     "update usersProfiles set name=?, surname=?, description=? where id=?;"
+             )) {
+            Class.forName("org.postgresql.Driver");
+
+            statement.setString(1, name);
+            statement.setString(2, surname);
+            statement.setString(3, description);
+            statement.setInt(4, profileID);
+
+            return statement.execute();
+        } catch (ClassNotFoundException | SQLException e) {
+            System.out.println("(UP#update) " + e.getMessage() + " : " + e.getCause());
+            return false;
+        }
+    }
+
     public String getJSON(int profileID) {
         return getUserProfile(profileID).toJSON();
     }

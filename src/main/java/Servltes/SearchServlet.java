@@ -45,8 +45,8 @@ public class SearchServlet extends HttpServlet {
             return "<div class='result' profileID='" + profileID + "' onclick='openProfile(this)'>" +
                     "<div class='result-id'>" + profileID + "</div>" +
                     "<div class='result-realImage' " +
-                    "style='background: no-repeat center/contain url(\"data: image/png; base64, " + image + "\");" +
-                    "background-size: cover;'></div>" +
+                    "style='background: no-repeat center/cover url(\"data: image/png; base64, " + image + "\");'" +
+                    "></div>" +
 //                    "<img src='data: image/png; base64, " + image + "' class='result-img'>" +
                     "<div class='result-name'>" + name + "</div>" +
                     "</div>";
@@ -54,8 +54,8 @@ public class SearchServlet extends HttpServlet {
             return "<div class='result' profileID='" + profileID + "' onclick='openProfile(this)'>" +
                     "<div class='result-id'>" + profileID + "</div>" +
                     "<div class='result-realImage' " +
-                    "style='background: no-repeat center/contain url(\"/imgs/space7.jpg\");" +
-                    "background-size: cover;'></div>" +
+                    "style='background: no-repeat center/cover url(\"/imgs/space7.jpg\");'" +
+                    "></div>" +
                     "<div class='result-name'>" + name + "</div>" +
                     "</div>";
         }

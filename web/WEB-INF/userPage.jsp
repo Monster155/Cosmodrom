@@ -49,9 +49,15 @@
                     </div>
                 </div>
             </div>
+            <form method="get" action='/edit' id="info3">
+                <button type="submit">
+                    Edit profile
+                </button>
+            </form>
         </div>
     </div>
 </div>
+<script>let profileID = ${profileID};</script> <!-- # -->
 <script src="/js/userPageJS/loadInfo.js"></script>
 </body>
 </html>

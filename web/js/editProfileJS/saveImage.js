@@ -4,7 +4,7 @@ function uploadFile() {
     let data = new FormData();
     data.append("fileToUpload", blobFile);
     let xhr = new XMLHttpRequest();
-    xhr.open('post', '/reg', true);
+    xhr.open('post', '/edit', true);
     xhr.send(data);
 }
 

@@ -23,7 +23,7 @@ public class RestoreServlet extends HttpServlet {
         String email = req.getParameter("email");
 
         if (UsersLoginJDBC.here.contains(email)) {
-            //TODO send mail (code like steam guard)
+            // TODO send mail (code like steam guard)
             System.out.println("Sending email...");
             req.getRequestDispatcher(prop.getProperty("restore")).forward(req, resp);
         } else {
